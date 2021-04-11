@@ -21,6 +21,7 @@ import { manageUser } from './lib/manageUser'
 // don't try to initialize if already initialized. That's just rude.
 firebase.initializeApp(firebaseConfig)
 //}
+console.log('node', process.env.NODE_ENV)
 
 function App() {
    const [isSignedIn, setIsSignedIn] = React.useState(false)
@@ -46,10 +47,6 @@ function App() {
       return () => unregisterAuthObserver()
    }, [])
 
-   if (isSignedIn) {
-      // TODO remove this once it is being updated
-      console.log(firebase.auth().currentUser)
-   }
    return (
       <ApolloProvider client={client}>
          <Router>
