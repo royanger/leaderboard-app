@@ -1,0 +1,6 @@
+type Item {
+   name: String
+}
+type Query {
+   allItems: [Item!]
+}

@@ -3,8 +3,6 @@ import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 function Header({ name, isSignedIn, handleLogout }) {
-   console.log('NAME', name)
-   console.log('Signed In', isSignedIn)
    return (
       <header>
          <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
