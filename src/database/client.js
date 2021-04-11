@@ -5,7 +5,7 @@ const key =
       ? process.env.REACT_APP_FAUNA_ITEMEDITOR_KEY
       : process.env.FAUNA_ITEMEDITOR_KEY
 
-console.log('FAUNA KEY', key)
+console.log('FAUNA KEY', process.env.FAUNA_ITEMEDITOR_KEY)
 
 export const client = new ApolloClient({
    uri: 'https://graphql.fauna.com/graphql',

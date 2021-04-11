@@ -21,7 +21,6 @@ import { manageUser } from './lib/manageUser'
 // don't try to initialize if already initialized. That's just rude.
 firebase.initializeApp(firebaseConfig)
 //}
-console.log('node', process.env.NODE_ENV)
 
 function App() {
    const [isSignedIn, setIsSignedIn] = React.useState(false)
