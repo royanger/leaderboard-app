@@ -1,15 +1,32 @@
 import * as React from 'react'
-import { Container, Row, Col, Navbar } from 'react-bootstrap'
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 
-function Header({ name }) {
+function Header({ name, isSignedIn, handleLogout }) {
    console.log('NAME', name)
+   console.log('Signed In', isSignedIn)
    return (
       <header>
-         <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-            <Navbar.Brand>Jeffe's Leaderboard</Navbar.Brand>
+         <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
+            <LinkContainer to="/">
+               <Navbar.Brand>Jeffe's Leaderboard</Navbar.Brand>
+            </LinkContainer>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-               {name ? <p>{name}</p> : 'Not signed in'}
+               <Nav className="ml-auto">
+                  {isSignedIn ? (
+                     <NavDropdown title={name} id="username">
+                        <LinkContainer to="/profile">
+                           <NavDropdown.Item>Profile</NavDropdown.Item>
+                        </LinkContainer>
+                        <NavDropdown.Item onClick={handleLogout}>
+                           Logout
+                        </NavDropdown.Item>
+                     </NavDropdown>
+                  ) : (
+                     ''
+                  )}
+               </Nav>
             </Navbar.Collapse>
          </Navbar>
       </header>

@@ -1,7 +1,7 @@
 import * as React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import firebase from 'firebase'
 import 'firebase/auth'
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 
 // grab our tokens and config params for firebase
 import { firebaseConfig, uiConfig } from './auth/firebase'
@@ -9,15 +9,23 @@ import { firebaseConfig, uiConfig } from './auth/firebase'
 // import components
 import Header from './components/Header'
 import Login from './components/Login'
+import Profile from './components/Profile'
+import Leaderboard from './components/Leaderboard'
 
-if (!firebase.app.length) {
-   // don't try to initialize if already initialized. That's just rude.
-   firebase.initializeApp(firebaseConfig)
-}
+//if (!firebase.app.length) {
+// don't try to initialize if already initialized. That's just rude.
+firebase.initializeApp(firebaseConfig)
+//}
 
 function App() {
    const [isSignedIn, setIsSignedIn] = React.useState(false)
    const [name, setName] = React.useState('')
+
+   function handleLogout() {
+      console.log('CLICKED')
+      firebase.auth().signOut()
+      setName('')
+   }
 
    React.useEffect(() => {
       const unregisterAuthObserver = firebase
@@ -33,17 +41,27 @@ function App() {
       console.log(firebase.auth().currentUser.uid)
    }
    return (
-      <>
-         <Header name={name} />
+      <Router>
+         {console.log('signedin', isSignedIn)}
+         <Header
+            name={name}
+            isSignedIn={isSignedIn}
+            handleLogout={handleLogout}
+         />
 
-         <div>
-            {isSignedIn ? (
-               <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
-            ) : (
-               <Login uiConfig={uiConfig} />
-            )}
-         </div>
-      </>
+         {!isSignedIn ? (
+            <Login uiConfig={uiConfig} />
+         ) : (
+            <Switch>
+               <Route path="/profile">
+                  <Profile />
+               </Route>
+               <Route path="/">
+                  <Leaderboard />
+               </Route>
+            </Switch>
+         )}
+      </Router>
    )
 }
 
