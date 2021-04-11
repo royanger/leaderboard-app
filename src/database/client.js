@@ -3,7 +3,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'
 const key =
    process.env.NODE_ENV === 'development'
       ? process.env.REACT_APP_FAUNA_ITEMEDITOR_KEY
-      : process.env.FAUNA_ITEMEDITOR_KEY
+      : process.env.REACT_APP_FAUNA_ITEMEDITOR_KEY
 
 console.log('FAUNA KEY', process.env.FAUNA_ITEMEDITOR_KEY)
 
