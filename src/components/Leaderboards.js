@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Container, Row, Col, Spinner } from 'react-bootstrap'
+import { Container, Row, Spinner } from 'react-bootstrap'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 

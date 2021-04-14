@@ -15,7 +15,6 @@ import Leaderboard from './components/Leaderboard'
 
 // handle creating or updating user document on Fauna
 import { manageUser } from './lib/manageUser'
-import LeaderboardItems from './components/LeaderboardItems'
 
 // don't try to initialize if already initialized. That's just rude.
 if (!firebase.apps.length) {
