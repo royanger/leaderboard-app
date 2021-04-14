@@ -21,7 +21,7 @@ function Header({ name, isSignedIn, handleLogout }) {
             <Navbar.Collapse id="basic-navbar-nav">
                <Nav className="ml-auto">
                   {isSignedIn ? (
-                     <NavDropdown title={name} id="username">
+                     <NavDropdown title={name.name} id="username">
                         <LinkContainer to="/profile">
                            <NavDropdown.Item>Profile</NavDropdown.Item>
                         </LinkContainer>

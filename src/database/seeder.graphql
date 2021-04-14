@@ -68,6 +68,16 @@ mutation createEvents {
    createEvent(
       data: {
          board: { connect: "295792854917186050" }
+         userDoing: { connect: "295792854875243010" }
+         userReceiving: { connect: "295792865800356354" }
+         count: 7
+      }
+   ) {
+      _id
+   }
+   createEvent(
+      data: {
+         board: { connect: "295792854917186050" }
          userDoing: { connect: "295792865800356354" }
          userReceiving: { connect: "295792854875243010" }
          count: 7
@@ -77,7 +87,7 @@ mutation createEvents {
    }
    createEvent(
       data: {
-         board: { connect: "295792854917186050" }
+         board: { connect: "295792865802453506" }
          userDoing: { connect: "295792854875243010" }
          userReceiving: { connect: "295792865800356354" }
          count: 7
