@@ -6,7 +6,7 @@ import { apolloClient } from './database/client'
 
 import App from './App'
 
-console.log('key', process.env.REACT_APP_FAUNA_ITEMEDITOR_KEY)
+console.log('key', process.env.REACT_APP_FAUNA_ADMIN_KEY)
 
 const root = document.querySelector('#root')
 ReactDOM.render(
