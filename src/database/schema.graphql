@@ -1,6 +1,29 @@
-type Item {
+type User {
+   uid: String! @unique
    name: String
+   displayName: String
+   provider: String
+   boards: [Board] @relation
 }
+
+type Board {
+   title: String
+   description: String
+   config: String
+   action: String
+   nonUser: String
+   user: User
+   events: [Event] @relation
+}
+
+type Event {
+   board: Board
+   userDoing: User
+   userReceiving: User
+   count: Int
+}
+
 type Query {
-   allItems: [Item!]
+   allBoards: [Board!]
+   accountByUid(uid: String!): [User!]
 }

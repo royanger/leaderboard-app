@@ -1,0 +1,22 @@
+type Query {
+   allBoards: [Board!]
+   allEvents: [Event!]
+}
+
+query FindBoardsandEvents {
+   findBoardByID(id: "295704344984027654") {
+      title
+      description
+      events {
+         data {
+            userDoing {
+               name
+            }
+            userReceiving {
+               name
+            }
+            count
+         }
+      }
+   }
+}

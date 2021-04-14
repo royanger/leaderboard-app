@@ -1,11 +1,19 @@
 import * as React from 'react'
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 function Header({ name, isSignedIn, handleLogout }) {
    return (
-      <header>
-         <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
+      // <header>
+      <Navbar
+         bg="primary"
+         variant="dark"
+         expand="lg"
+         fixed="top"
+         as="header"
+         collapseOnSelect
+      >
+         <Container>
             <LinkContainer to="/">
                <Navbar.Brand>Jeffe's Leaderboard</Navbar.Brand>
             </LinkContainer>
@@ -26,8 +34,9 @@ function Header({ name, isSignedIn, handleLogout }) {
                   )}
                </Nav>
             </Navbar.Collapse>
-         </Navbar>
-      </header>
+         </Container>
+      </Navbar>
+      // </header>
    )
 }
 

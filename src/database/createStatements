@@ -1,0 +1,156 @@
+mutation CreateAUser {
+  createUser(data: {
+    uid: "dasfdasfsadf"
+    name: "Roy Angerasdf"
+    displayName: "Roysadf"
+    provider: "google.com"
+  }) {
+    uid
+    name
+    displayName
+    provider
+    _id
+  }
+}
+
+mutation CreateAUser {
+  createUser(data: {
+    uid: "a23423"
+    name: "Dazed898"
+    displayName: "Justin"
+    provider: "google.com"
+  }) {
+    uid
+    name
+    displayName
+    provider
+    _id
+  }
+}
+
+
+mutation CreateAUser {
+  createUser(data: {
+    uid: "a234sdf23"
+    name: "Trae"
+    displayName: "Trae"
+    provider: "google.com"
+  }) {
+    uid
+    name
+    displayName
+    provider
+    _id
+  }
+}
+
+mutation CreateABoard {
+  createBoard(data: {
+    title: "Car Killer!"
+    description: "Let's track how many times car in PUBG is used to kill another player."
+    config: "user"
+    action: "ran over"
+    nonUser: "sadfsadf"
+    user: { connect: "295704321375339014" }
+  }) {
+    title
+    description
+    config
+    action
+    nonUser
+    user { displayName }
+
+    _id
+
+  }
+}
+
+mutation CreateABoard {
+  createBoard(data: {
+    title: "Flashed and Blinded"
+    description: "How often can we blind someone in any game that has flashes?"
+    config: "user"
+    action: "flashed"
+    nonUser: "sadfsadf"
+    user: { connect: "295704321375339014" }
+  }) {
+    title
+    description
+    config
+    action
+    nonUser
+    user { displayName }
+
+    _id
+
+  }
+}
+
+
+mutation CreateAnEvent {
+  createEvent(data: {
+    board: { connect: "295704344984027654"}
+    userDoing: { connect: "295704321375339014" }
+    userReceiving: { connect: "295704326315180550" }
+    count: 7
+  }) {
+    board { title }
+    userDoing { displayName }
+    userReceiving  { displayName }
+    _id
+   count
+  }
+}
+
+mutation CreateAnEvent {
+  createEvent(data: {
+    board: { connect: "295704344984027654"}
+    userDoing: { connect: "295704321375339014" }
+    userReceiving: { connect: "295704326315180550" }
+    count: 3
+  }) {
+    board { title }
+    userDoing { displayName }
+    userReceiving  { displayName }
+    _id
+   count
+  }
+}
+
+mutation CreateAnEvent {
+  createEvent(data: {
+    board: { connect: "295704344984027654"}
+    userDoing: { connect: "295704321375339014" }
+    userReceiving: { connect: "295704326315180550" }
+    count: 9
+  }) {
+    board { title }
+    userDoing { displayName }
+    userReceiving  { displayName }
+    _id
+   count
+  }
+}
+
+mutation CreateAnEvent {
+  createEvent(data: {
+    board: { connect: "295704344984027654"}
+    userDoing: { connect: "295704321375339014" }
+    userReceiving: { connect: "295704326315180550" }
+    count: 5
+  }) {
+    board { title }
+    userDoing { displayName }
+    userReceiving  { displayName }
+    _id
+   count
+  }
+}
+
+
+
+
+
+
+
+

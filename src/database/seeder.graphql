@@ -1,0 +1,88 @@
+mutation createUser {
+   createUser(
+      data: {
+         uid: "asfds23d"
+         name: "Roy Anger"
+         displayName: "Anger"
+         boards: {
+            create: [
+               {
+                  title: "Car Murderer!"
+                  description: "Tracking how many times you can run a teammate over in PUBG"
+                  config: "user"
+                  action: "ran over"
+               }
+            ]
+         }
+      }
+   ) {
+      _id
+   }
+}
+
+mutation createUser {
+   createUser(
+      data: {
+         uid: "asfasdfdasfdsaf"
+         name: "Dazed898"
+         displayName: "Justin"
+         boards: {
+            create: [
+               {
+                  title: "Sunken Treasuer"
+                  description: "How many times can you ship a friend's ship in Sea of Thieves"
+                  config: "user"
+                  action: "scuttled"
+               }
+            ]
+         }
+      }
+   ) {
+      _id
+   }
+}
+
+mutation createUser {
+   createUser(
+      data: {
+         uid: "asfdsd"
+         name: "John Joseph"
+         displayName: "John"
+         boards: {
+            create: [
+               {
+                  title: "Frag Kills!"
+                  description: "Kills with frags in any FPS"
+                  config: "user"
+                  action: "killed someone with a frag grenade!"
+               }
+            ]
+         }
+      }
+   ) {
+      _id
+   }
+}
+
+mutation createEvents {
+   createEvent(
+      data: {
+         board: { connect: "295792854917186050" }
+         userDoing: { connect: "295792865800356354" }
+         userReceiving: { connect: "295792854875243010" }
+         count: 7
+      }
+   ) {
+      _id
+   }
+   createEvent(
+      data: {
+         board: { connect: "295792854917186050" }
+         userDoing: { connect: "295792854875243010" }
+         userReceiving: { connect: "295792865800356354" }
+         count: 7
+      }
+   ) {
+      _id
+   }
+}

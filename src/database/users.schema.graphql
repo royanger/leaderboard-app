@@ -1,6 +1,0 @@
-type User {
-   uid: String! @unique
-   name: String
-   displayName: String! @unique
-   provider: String
-}

@@ -1,16 +1,13 @@
+import { defaultDataIdFromObject } from '@apollo/client'
 import * as React from 'react'
+import { Container } from 'react-bootstrap'
 
-// import components
-import LeaderboardItems from './LeaderboardItems'
-
-function Leaderboard() {
+function Leaderboards() {
    return (
-      <>
-         <h2>Leaderboard</h2>
-         <p>Who are you?</p>
-         <LeaderboardItems />
-      </>
+      <Container style={{ marginTop: '70px' }}>
+         <h2>Single Leaderboard View</h2>
+      </Container>
    )
 }
 
-export default Leaderboard
+export default Leaderboards
