@@ -1,10 +1,11 @@
 import * as React from 'react'
-import { Container, Row, Spinner } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 
 // import components
 import LeaderboardItems from './LeaderboardItems'
+import Loader from './Loader'
 
 // our base query
 const ITEMS_QUERY = gql`
@@ -44,22 +45,7 @@ function Leaderboard() {
    const { data, error, loading } = useQuery(ITEMS_QUERY)
 
    if (loading) {
-      return (
-         <Container
-            style={{
-               marginTop: '80px',
-               height: '200px',
-               width: '100%',
-               display: 'flex',
-               alignItems: 'center',
-               justifyContent: 'center',
-            }}
-         >
-            <Spinner animation="border" role="status" size="lg">
-               <span className="sr-only">Loading...</span>
-            </Spinner>
-         </Container>
-      )
+      return <Loader />
    }
    if (error) {
       console.log(error)

@@ -13,6 +13,7 @@ import Login from './components/Login'
 import Profile from './components/Profile'
 import Leaderboards from './components/Leaderboards'
 import Leaderboard from './components/Leaderboard'
+import Pubg from './components/pubg'
 
 // don't try to initialize if already initialized. That's just rude.
 if (!firebase.apps.length) {
@@ -25,6 +26,7 @@ function App() {
    const [isSignedIn, setIsSignedIn] = React.useState(false)
    const [userInfo, setUserInfo] = React.useState({
       _id: '',
+      uid: '',
       name: '',
       displayName: '',
    })
@@ -49,8 +51,8 @@ function App() {
                      provider: firebase.auth().currentUser.providerData[0]
                         .providerId,
                   })
-                  const { _id, name, displayName } = results
-                  setUserInfo({ _id, name, displayName })
+                  const { _id, uid, name, displayName } = results
+                  setUserInfo({ _id, uid, name, displayName })
                }
                wrapper()
             }
@@ -69,14 +71,17 @@ function App() {
             <Login uiConfig={uiConfig} />
          ) : (
             <Switch>
-               <Route path="/leaderboard/:id">
+               <Route exact path="/">
+                  <Leaderboards />
+               </Route>
+               <Route exact path="/leaderboard/:id">
                   <Leaderboard />
                </Route>
-               <Route path="/profile">
-                  <Profile />
+               <Route exact path="/profile">
+                  <Profile userInfo={userInfo} />
                </Route>
-               <Route path="/">
-                  <Leaderboards />
+               <Route exact path="/pubg">
+                  <Pubg />
                </Route>
             </Switch>
          )}

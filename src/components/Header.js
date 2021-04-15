@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
+import { Nav, Navbar, NavDropdown, NavItem, Container } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 function Header({ name, isSignedIn, handleLogout }) {
@@ -19,6 +19,9 @@ function Header({ name, isSignedIn, handleLogout }) {
             </LinkContainer>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
+               <LinkContainer to="/pubg">
+                  <NavItem>PUBG</NavItem>
+               </LinkContainer>
                <Nav className="ml-auto">
                   {isSignedIn ? (
                      <NavDropdown title={name.name} id="username">
