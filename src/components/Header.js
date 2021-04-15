@@ -19,10 +19,13 @@ function Header({ name, isSignedIn, handleLogout }) {
             </LinkContainer>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-               <LinkContainer to="/pubg">
-                  <NavItem>PUBG</NavItem>
-               </LinkContainer>
                <Nav className="ml-auto">
+                  <LinkContainer to="/">
+                     <Nav.Link>Leaderboards</Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to="/pubg">
+                     <Nav.Link>PUBG</Nav.Link>
+                  </LinkContainer>
                   {isSignedIn ? (
                      <NavDropdown title={name.name} id="username">
                         <LinkContainer to="/profile">
