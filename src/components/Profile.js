@@ -13,7 +13,10 @@ const UPDATE_DISPLAY_NAME = gql`
    }
 `
 
-function Profile({ userInfo: { _id, uid, name, displayName } }) {
+function Profile({
+   userInfo: { _id, uid, name, displayName },
+   updateDisplayNameInState,
+}) {
    const [newDisplayName, setNewDisplayName] = React.useState(displayName)
    const [displayNameSaved, setDisplayNameSaved] = React.useState({
       class: 'visually-hidden',
@@ -37,6 +40,7 @@ function Profile({ userInfo: { _id, uid, name, displayName } }) {
                class: '',
                status: 'disabled',
             })
+            updateDisplayNameInState(newDisplayName)
          })
    }
 

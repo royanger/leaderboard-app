@@ -38,6 +38,12 @@ function App() {
       setUserInfo('')
    }
 
+   // callback function for /profile when displayName changes. Avoid queries
+   function updateDisplayName(displayName) {
+      console.log('func called', displayName)
+      setUserInfo(prevInfo => ({ ...prevInfo, displayName }))
+   }
+
    React.useEffect(() => {
       const unregisterAuthObserver = firebase
          .auth()
@@ -78,7 +84,10 @@ function App() {
                   <Leaderboard />
                </Route>
                <Route exact path="/profile">
-                  <Profile userInfo={userInfo} />
+                  <Profile
+                     userInfo={userInfo}
+                     updateDisplayNameInState={updateDisplayName}
+                  />
                </Route>
                <Route exact path="/pubg">
                   <Pubg />
