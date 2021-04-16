@@ -1,37 +1,5 @@
 import { apolloClient } from '../database/client'
-import gql from 'graphql-tag'
-
-const USER_QUERY = gql`
-   query checkUserExists($uid: String!) {
-      accountByUid(uid: $uid) {
-         data {
-            _id
-            name
-            displayName
-            uid
-         }
-      }
-   }
-`
-
-const CREATE_USER = gql`
-   mutation CreateAUser($uid: String!, $name: String, $provider: String) {
-      createUser(
-         data: {
-            uid: $uid
-            name: $name
-            displayName: $name
-            provider: $provider
-         }
-      ) {
-         uid
-         name
-         displayName
-         provider
-         _id
-      }
-   }
-`
+import { CREATE_USER, USER_QUERY } from '../database/queries-mutations'
 
 export async function manageUser({ uid, name, provider }) {
    const queryResults = await apolloClient.query({

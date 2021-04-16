@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Nav, Navbar, NavDropdown, NavItem, Container } from 'react-bootstrap'
+import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 function Header({ name, isSignedIn, handleLogout }) {

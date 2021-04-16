@@ -7,13 +7,18 @@
    white-space: nowrap;
 }
 
-.btn-save {
+.btn-save,
+.btn-add {
    background-color: #007bff;
    border: 0;
    color: white;
-   padding: 7px 22px 9px;
-   margin-top: 15px;
+   padding: 7px 35px 9px;
+   margin: 0 0 0 20px;
 }
-.btn-save:active {
+.btn-add {
+   margin: 20px 0 0 0;
+}
+.btn-save:active,
+.btn-add:active {
    background-color: #084298;
 }
