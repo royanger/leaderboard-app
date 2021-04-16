@@ -297,7 +297,7 @@ function Profile({
                   <strong>Preview:</strong>
                   <br />
                   PlayerUnkown {action ? action : '<empty>'}{' '}
-                  WittiestUserNameEver
+                  {config ? 'WittiestUserNameEver' : ''}
                </div>
 
                <button
