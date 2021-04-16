@@ -9,7 +9,7 @@ import Loader from './Loader'
 
 // our base query
 
-function Leaderboard() {
+function Leaderboard({ userInfo }) {
    const { data, error, loading } = useQuery(ITEMS_QUERY)
 
    if (loading) {
@@ -24,7 +24,13 @@ function Leaderboard() {
          <h1>El Jeffe Leaderboards</h1>
          <Row noGutters={false}>
             {data.allBoards.data.map(board => {
-               return <LeaderboardItems key={board._id} board={board} />
+               return (
+                  <LeaderboardItems
+                     key={board._id}
+                     board={board}
+                     userInfo={userInfo}
+                  />
+               )
             })}
          </Row>
       </Container>

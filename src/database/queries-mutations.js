@@ -118,3 +118,52 @@ export const ITEMS_QUERY = gql`
       }
    }
 `
+
+export const BOARD_QUERY = gql`
+   query findBoard {
+      findBoardByID(id: "295792854917186050") {
+         _id
+         title
+         description
+         config
+         action
+         user {
+            _id
+            displayName
+         }
+         events {
+            data {
+               userDoing {
+                  _id
+                  displayName
+               }
+               userReceiving {
+                  _id
+                  displayName
+               }
+               count
+            }
+         }
+      }
+   }
+`
+
+export const EVENTS_QUERY = gql`
+   query findEvents {
+      findBoardByID(id: "295792854917186050") {
+         events {
+            data {
+               userDoing {
+                  _id
+                  displayName
+               }
+               userReceiving {
+                  _id
+                  displayName
+               }
+               count
+            }
+         }
+      }
+   }
+`

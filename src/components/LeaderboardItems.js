@@ -2,7 +2,27 @@ import * as React from 'react'
 import { Container, Col, Row } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
-function LeaderboardItems({ board }) {
+function LeaderboardItems({ board, userInfo: { _id, name, displayName } }) {
+   const [events, setEvents] = React.useState([])
+
+   React.useEffect(() => {
+      if (board.events.data[0] && board.events.data.length > 1) {
+         const tempEvents = [...board.events.data]
+         const sortedEvents = tempEvents.sort((a, b) => {
+            return b.count - a.count
+         })
+         setEvents(sortedEvents)
+      }
+   }, [board.events.data])
+
+   function handleIncrement(e) {
+      console.log('increment', e)
+   }
+
+   function handleDecrement(e) {
+      console.log('increment', e)
+   }
+
    return (
       <Col lg={6}>
          <Container
@@ -21,9 +41,9 @@ function LeaderboardItems({ board }) {
             >
                <LinkContainer
                   to={`/leaderboard/${board._id}`}
-                  style={{ color: '#f8f9fa' }}
+                  style={{ color: '#f8f9fa', cursor: 'pointer' }}
                >
-                  <h3>Test</h3>
+                  <h3>{board.title}</h3>
                </LinkContainer>
             </Container>
             <Container
@@ -34,7 +54,7 @@ function LeaderboardItems({ board }) {
                }}
             >
                <p>{board.description}</p>
-               {board.events.data.map(event => {
+               {events.map(event => {
                   return (
                      <div
                         key={event._id}
@@ -49,7 +69,51 @@ function LeaderboardItems({ board }) {
                               {event.userDoing.displayName} {board.action}{' '}
                               {event.userReceiving.displayName}
                            </Col>
-                           <Col xs={2}>{event.count}</Col>
+                           <Col xs={2}>
+                              {event.count}
+                              {_id === event.userDoing._id ||
+                              _id === event.userReceiving._id ? (
+                                 <>
+                                    <svg
+                                       xmlns="http://www.w3.org/2000/svg"
+                                       style={{
+                                          height: '1.35rem',
+                                          width: 'auto',
+                                          marginLeft: '5px',
+                                          color: '#198754',
+                                       }}
+                                       onClick={handleIncrement}
+                                       viewBox="0 0 20 20"
+                                       fill="currentColor"
+                                    >
+                                       <path
+                                          fillRule="evenodd"
+                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                                          clipRule="evenodd"
+                                       />
+                                    </svg>
+                                    <svg
+                                       xmlns="http://www.w3.org/2000/svg"
+                                       style={{
+                                          height: '1.35rem',
+                                          width: 'auto',
+                                          color: 'red',
+                                       }}
+                                       onClick={handleDecrement}
+                                       viewBox="0 0 20 20"
+                                       fill="currentColor"
+                                    >
+                                       <path
+                                          fillRule="evenodd"
+                                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
+                                          clipRule="evenodd"
+                                       />
+                                    </svg>
+                                 </>
+                              ) : (
+                                 ''
+                              )}
+                           </Col>
                         </Row>
                      </div>
                   )

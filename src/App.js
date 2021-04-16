@@ -78,7 +78,7 @@ function App() {
          ) : (
             <Switch>
                <Route exact path="/">
-                  <Leaderboards />
+                  <Leaderboards userInfo={userInfo} />
                </Route>
                <Route exact path="/leaderboard/:id">
                   <Leaderboard />

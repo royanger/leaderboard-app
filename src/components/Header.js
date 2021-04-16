@@ -15,7 +15,7 @@ function Header({ name, isSignedIn, handleLogout }) {
       >
          <Container>
             <LinkContainer to="/">
-               <Navbar.Brand>Jeffe's Leaderboard</Navbar.Brand>
+               <Navbar.Brand>Jeffe's Leaderboards</Navbar.Brand>
             </LinkContainer>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
