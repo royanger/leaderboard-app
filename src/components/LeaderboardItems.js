@@ -1,6 +1,11 @@
 import * as React from 'react'
 import { Container, Col, Row } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import { apolloClient } from '../database/client'
+import {
+   EVENTS_QUERY,
+   UPDATE_EVENT_COUNT,
+} from '../database/queries-mutations.js'
 
 function LeaderboardItems({ board, userInfo: { _id, name, displayName } }) {
    const [events, setEvents] = React.useState([])
@@ -15,12 +20,42 @@ function LeaderboardItems({ board, userInfo: { _id, name, displayName } }) {
       }
    }, [board.events.data])
 
-   function handleIncrement(e) {
-      console.log('increment', e)
+   function updateEventCount(id, count) {
+      apolloClient
+         .mutate({
+            mutation: UPDATE_EVENT_COUNT,
+            variables: {
+               id,
+               count,
+            },
+         })
+         .then(results => {
+            apolloClient
+               .mutate({
+                  mutation: EVENTS_QUERY,
+                  variables: {
+                     id: board._id,
+                  },
+               })
+               .then(results => {
+                  const sortedEvents = results.data.findBoardByID.events.data.sort(
+                     (a, b) => {
+                        return b.count - a.count
+                     }
+                  )
+                  setEvents(sortedEvents)
+               })
+         })
    }
 
-   function handleDecrement(e) {
-      console.log('increment', e)
+   function handleIncrement(id, count) {
+      console.log('increment', id, count)
+      updateEventCount(id, count + 1)
+   }
+
+   function handleDecrement(id, count) {
+      console.log('decrement', id, count)
+      updateEventCount(id, count - 1)
    }
 
    return (
@@ -65,11 +100,11 @@ function LeaderboardItems({ board, userInfo: { _id, name, displayName } }) {
                         }}
                      >
                         <Row>
-                           <Col xs={10}>
+                           <Col>
                               {event.userDoing.displayName} {board.action}{' '}
                               {event.userReceiving.displayName}
                            </Col>
-                           <Col xs={2}>
+                           <Col xs="auto">
                               {event.count}
                               {_id === event.userDoing._id ||
                               _id === event.userReceiving._id ? (
@@ -82,7 +117,12 @@ function LeaderboardItems({ board, userInfo: { _id, name, displayName } }) {
                                           marginLeft: '5px',
                                           color: '#198754',
                                        }}
-                                       onClick={handleIncrement}
+                                       onClick={() =>
+                                          handleIncrement(
+                                             event._id,
+                                             event.count
+                                          )
+                                       }
                                        viewBox="0 0 20 20"
                                        fill="currentColor"
                                     >
@@ -99,7 +139,12 @@ function LeaderboardItems({ board, userInfo: { _id, name, displayName } }) {
                                           width: 'auto',
                                           color: 'red',
                                        }}
-                                       onClick={handleDecrement}
+                                       onClick={() =>
+                                          handleDecrement(
+                                             event._id,
+                                             event.count
+                                          )
+                                       }
                                        viewBox="0 0 20 20"
                                        fill="currentColor"
                                     >

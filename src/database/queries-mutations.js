@@ -149,10 +149,11 @@ export const BOARD_QUERY = gql`
 `
 
 export const EVENTS_QUERY = gql`
-   query findEvents {
-      findBoardByID(id: "295792854917186050") {
+   query findEvents($id: ID!) {
+      findBoardByID(id: $id) {
          events {
             data {
+               _id
                userDoing {
                   _id
                   displayName
@@ -164,6 +165,15 @@ export const EVENTS_QUERY = gql`
                count
             }
          }
+      }
+   }
+`
+
+export const UPDATE_EVENT_COUNT = gql`
+   mutation UpdateEventCount($id: ID!, $count: Int) {
+      updateEvent(id: $id, data: { count: $count }) {
+         _id
+         count
       }
    }
 `
