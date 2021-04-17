@@ -120,8 +120,8 @@ export const ITEMS_QUERY = gql`
 `
 
 export const BOARD_QUERY = gql`
-   query findBoard {
-      findBoardByID(id: "295792854917186050") {
+   query findBoard($id: ID!) {
+      findBoardByID(id: $id) {
          _id
          title
          description
@@ -133,6 +133,7 @@ export const BOARD_QUERY = gql`
          }
          events {
             data {
+               _id
                userDoing {
                   _id
                   displayName

@@ -12,7 +12,7 @@ import Header from './components/Header'
 import Login from './components/Login'
 import Profile from './components/Profile'
 import Leaderboards from './components/Leaderboards'
-import Leaderboard from './components/Leaderboard'
+import FullLeaderboard from './components/FullLeaderboard'
 import Pubg from './components/pubg'
 
 // don't try to initialize if already initialized. That's just rude.
@@ -81,7 +81,7 @@ function App() {
                   <Leaderboards userInfo={userInfo} />
                </Route>
                <Route exact path="/leaderboard/:id">
-                  <Leaderboard />
+                  <FullLeaderboard userInfo={userInfo} />
                </Route>
                <Route exact path="/profile">
                   <Profile

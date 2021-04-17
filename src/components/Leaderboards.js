@@ -4,12 +4,12 @@ import { useQuery } from '@apollo/react-hooks'
 import { ITEMS_QUERY } from '../database/queries-mutations'
 
 // import components
-import LeaderboardItems from './LeaderboardItems'
+import Leaderboard from './Leaderboard'
 import Loader from './Loader'
 
 // our base query
 
-function Leaderboard({ userInfo }) {
+function Leaderboards({ userInfo }) {
    const { data, error, loading } = useQuery(ITEMS_QUERY)
 
    if (loading) {
@@ -25,10 +25,11 @@ function Leaderboard({ userInfo }) {
          <Row noGutters={false}>
             {data.allBoards.data.map(board => {
                return (
-                  <LeaderboardItems
+                  <Leaderboard
                      key={board._id}
                      board={board}
                      userInfo={userInfo}
+                     standalone={false}
                   />
                )
             })}
@@ -37,4 +38,4 @@ function Leaderboard({ userInfo }) {
    )
 }
 
-export default Leaderboard
+export default Leaderboards
