@@ -100,11 +100,13 @@ function Leaderboard({ board, userInfo: { _id, name, displayName } }) {
                         <Row>
                            <Col>
                               {event.userDoing.displayName} {board.action}{' '}
-                              {event.userReceiving.displayName}
+                              {board.config
+                                 ? event.userReceiving.displayName
+                                 : ''}
                            </Col>
                            <Col xs="auto">
                               {event.count}
-                              {_id === event.userDoing._id ||
+                              {/* {_id === event.userDoing._id ||
                               _id === event.userReceiving._id ? (
                                  <>
                                     <svg
@@ -155,7 +157,7 @@ function Leaderboard({ board, userInfo: { _id, name, displayName } }) {
                                  </>
                               ) : (
                                  ''
-                              )}
+                              )} */}
                            </Col>
                         </Row>
                      </div>

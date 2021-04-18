@@ -5,7 +5,8 @@ import { apolloClient } from '../database/client'
 import { useQuery } from '@apollo/react-hooks'
 import {
    BOARD_QUERY,
-   CREATE_EVENT,
+   CREATE_EVENT_FULL,
+   CREATE_EVENT_PARTIAL,
    EVENTS_QUERY,
    FIND_USERS_QUERY,
    UPDATE_EVENT_COUNT,
@@ -27,7 +28,7 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
       text: '',
    })
 
-   console.log(board.config)
+   // console.log(board.config)
 
    React.useEffect(() => {
       apolloClient
@@ -96,16 +97,27 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
       e.preventDefault()
       setMessage({ type: 'status', text: 'Saving' })
 
-      if (!userDoing || !userReceiving) {
-         console.log('form not complete')
-         setMessage({ type: 'error', text: 'Please select both users' })
-         return
+      if (board.config) {
+         if (!userDoing || !userReceiving) {
+            console.log('form not complete')
+            setMessage({ type: 'error', text: 'Please select both users' })
+            return
+         }
+      } else {
+         if (!userDoing) {
+            console.log('form not complete')
+            setMessage({ type: 'error', text: 'Please select both users' })
+            return
+         }
       }
-      console.log('board', board._id)
+
+      // can't find a way to pass a default value for a variable
+      // used two queries -- don't love this solution
+      const query = board.config ? CREATE_EVENT_FULL : CREATE_EVENT_PARTIAL
 
       apolloClient
          .mutate({
-            mutation: CREATE_EVENT,
+            mutation: query,
             variables: {
                board: board._id,
                userDoing: userDoing,
@@ -186,11 +198,13 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                            >
                               <Col>
                                  {event.userDoing.displayName} {board.action}{' '}
-                                 {event.userReceiving.displayName}
+                                 {board.config
+                                    ? event.userReceiving.displayName
+                                    : ''}
                               </Col>
                               <Col xs="auto">
                                  {event.count}
-                                 {_id === event.userDoing._id ||
+                                 {/* {_id === event.userDoing._id ||
                                  _id === event.userReceiving._id ? (
                                     <>
                                        <svg
@@ -241,7 +255,7 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                                     </>
                                  ) : (
                                     ''
-                                 )}
+                                 )} */}
                               </Col>
                            </Row>
                         </div>
@@ -299,34 +313,43 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                   >
                      {board.action}
                   </div>
-                  <div style={{ flexGrow: '1' }}>
-                     <Form.Group
-                        controlId="exampleForm.ControlSelect1"
-                        style={{ margin: '0' }}
-                     >
-                        <Form.Label>Person the receiving end</Form.Label>
-                        <Form.Control as="select">
-                           <option
-                              onClick={() => handleSelect('', 'userReceiving')}
-                           ></option>
-                           {data
-                              ? data.allUsers.data.map(user => {
-                                   return (
-                                      <option
-                                         key={user._id}
-                                         id={user._id}
-                                         onClick={() =>
-                                            handleSelect(user, 'userReceiving')
-                                         }
-                                      >
-                                         {user.displayName}
-                                      </option>
-                                   )
-                                })
-                              : ''}
-                        </Form.Control>
-                     </Form.Group>
-                  </div>
+                  {board.config ? (
+                     <div style={{ flexGrow: '1' }}>
+                        <Form.Group
+                           controlId="exampleForm.ControlSelect1"
+                           style={{ margin: '0' }}
+                        >
+                           <Form.Label>Person the receiving end</Form.Label>
+                           <Form.Control as="select">
+                              <option
+                                 onClick={() =>
+                                    handleSelect('', 'userReceiving')
+                                 }
+                              ></option>
+                              {data
+                                 ? data.allUsers.data.map(user => {
+                                      return (
+                                         <option
+                                            key={user._id}
+                                            id={user._id}
+                                            onClick={() =>
+                                               handleSelect(
+                                                  user,
+                                                  'userReceiving'
+                                               )
+                                            }
+                                         >
+                                            {user.displayName}
+                                         </option>
+                                      )
+                                   })
+                                 : ''}
+                           </Form.Control>
+                        </Form.Group>
+                     </div>
+                  ) : (
+                     ''
+                  )}
                   <div style={{ padding: '0 0 0 20px' }}>
                      <Button variant="primary" type="submit">
                         Create

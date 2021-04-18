@@ -37,7 +37,6 @@ function Profile({
       // make sure the user data has loaded from prop before running the query, or it will error
       // error would happen on reload / direct link to route/page
       if (_id) {
-         console.log('do the query')
          apolloClient
             .mutate({
                mutation: BOARDS_QUERY,

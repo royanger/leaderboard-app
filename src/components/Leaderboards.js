@@ -17,7 +17,6 @@ function Leaderboards({ userInfo }) {
             mutation: ITEMS_QUERY,
          })
          .then(results => {
-            console.log(results)
             setBoards(results.data.allBoards.data)
             setLoading(false)
          })

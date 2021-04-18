@@ -179,7 +179,7 @@ export const UPDATE_EVENT_COUNT = gql`
    }
 `
 
-export const CREATE_EVENT = gql`
+export const CREATE_EVENT_FULL = gql`
    mutation createEvent(
       $board: ID!
       $userDoing: ID!
@@ -191,6 +191,20 @@ export const CREATE_EVENT = gql`
             board: { connect: $board }
             userDoing: { connect: $userDoing }
             userReceiving: { connect: $userReceiving }
+            count: $count
+         }
+      ) {
+         _id
+      }
+   }
+`
+
+export const CREATE_EVENT_PARTIAL = gql`
+   mutation createEvent($board: ID!, $userDoing: ID!, $count: Int) {
+      createEvent(
+         data: {
+            board: { connect: $board }
+            userDoing: { connect: $userDoing }
             count: $count
          }
       ) {
