@@ -51,7 +51,7 @@ mutation CreateABoard {
     config: "user"
     action: "ran over"
     nonUser: "sadfsadf"
-    user: { connect: "295704321375339014" }
+    user: { connect: "296192241634902532" }
   }) {
     title
     description
@@ -72,7 +72,7 @@ mutation CreateABoard {
     config: "user"
     action: "flashed"
     nonUser: "sadfsadf"
-    user: { connect: "295704321375339014" }
+    user: { connect: "296192241634902532" }
   }) {
     title
     description
@@ -89,9 +89,9 @@ mutation CreateABoard {
 
 mutation CreateAnEvent {
   createEvent(data: {
-    board: { connect: "295704344984027654"}
-    userDoing: { connect: "295704321375339014" }
-    userReceiving: { connect: "295704326315180550" }
+    board: { connect: "296192241634902532"}
+    userDoing: { connect: "296192241634902532" }
+    userReceiving: { connect: "296192232034140674" }
     count: 7
   }) {
     board { title }
@@ -104,9 +104,9 @@ mutation CreateAnEvent {
 
 mutation CreateAnEvent {
   createEvent(data: {
-    board: { connect: "295704344984027654"}
-    userDoing: { connect: "295704321375339014" }
-    userReceiving: { connect: "295704326315180550" }
+    board: { connect: "296192241634902532"}
+    userDoing: { connect: "296192241634902532" }
+    userReceiving: { connect: "296192223313134084" }
     count: 3
   }) {
     board { title }
@@ -119,9 +119,9 @@ mutation CreateAnEvent {
 
 mutation CreateAnEvent {
   createEvent(data: {
-    board: { connect: "295704344984027654"}
-    userDoing: { connect: "295704321375339014" }
-    userReceiving: { connect: "295704326315180550" }
+    board: { connect: "296192241634902532"}
+    userDoing: { connect: "296192232034140674" }
+    userReceiving: { connect: "296192241634902532" }
     count: 9
   }) {
     board { title }
@@ -134,9 +134,9 @@ mutation CreateAnEvent {
 
 mutation CreateAnEvent {
   createEvent(data: {
-    board: { connect: "295704344984027654"}
-    userDoing: { connect: "295704321375339014" }
-    userReceiving: { connect: "295704326315180550" }
+    board: { connect: "296192241634902532"}
+    userDoing: { connect: "296192232034140674" }
+    userReceiving: { connect: "296192223313134084" }
     count: 5
   }) {
     board { title }

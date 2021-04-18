@@ -178,3 +178,14 @@ export const UPDATE_EVENT_COUNT = gql`
       }
    }
 `
+
+export const FIND_USERS_QUERY = gql`
+   query findAllUsers {
+      allUsers {
+         data {
+            _id
+            displayName
+         }
+      }
+   }
+`

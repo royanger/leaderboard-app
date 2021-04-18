@@ -1,11 +1,12 @@
 import * as React from 'react'
 import { useParams } from 'react-router-dom'
-import { Container, Col, Row } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
+import { Container, Col, Row, Form, Button } from 'react-bootstrap'
 import { apolloClient } from '../database/client'
+import { useQuery } from '@apollo/react-hooks'
 import {
    BOARD_QUERY,
    EVENTS_QUERY,
+   FIND_USERS_QUERY,
    UPDATE_EVENT_COUNT,
 } from '../database/queries-mutations.js'
 
@@ -17,6 +18,9 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
    const [loading, setLoading] = React.useState(true)
    const [board, setBoard] = React.useState('')
    const [events, setEvents] = React.useState([])
+   const { loading: usersLoading, error, data } = useQuery(FIND_USERS_QUERY)
+
+   console.log(data.allUsers.data)
 
    React.useEffect(() => {
       apolloClient
@@ -80,8 +84,11 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
    }
 
    return (
-      <Container style={{ marginTop: '70px' }}>
-         <Col lg={12}>
+      <Container style={{ marginTop: '90px' }}>
+         <h3>{board.title}</h3>
+         <p>{board.description}</p>
+
+         <Col lg={12} style={{ padding: '0' }}>
             <Container
                style={{
                   border: '1px solid gray',
@@ -91,26 +98,22 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
             >
                <Container
                   style={{
-                     backgroundColor: '#343a40',
-                     color: '#f8f9fa',
-                     padding: '10px',
-                  }}
-               >
-                  <LinkContainer
-                     to={`/leaderboard/${board._id}`}
-                     style={{ color: '#f8f9fa', cursor: 'pointer' }}
-                  >
-                     <h3>{board.title}</h3>
-                  </LinkContainer>
-               </Container>
-               <Container
-                  style={{
                      color: 'f8f9fa',
-                     padding: '10px',
+                     padding: '0 10px 10px 10px',
                      fontSize: '1.2rem',
                   }}
                >
-                  <p>{board.description}</p>
+                  <Row
+                     style={{
+                        backgroundColor: '#343a40',
+                        color: '#f8f9fa',
+                        padding: '10px',
+                        margin: '0 -10px 20px',
+                     }}
+                  >
+                     <Col>Test</Col>
+                     <Col xs="auto">Count</Col>
+                  </Row>
                   {events.map(event => {
                      return (
                         <div
@@ -121,7 +124,11 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                               paddingBottom: '2px',
                            }}
                         >
-                           <Row>
+                           <Row
+                              style={{
+                                 color: '#343a40',
+                              }}
+                           >
                               <Col>
                                  {event.userDoing.displayName} {board.action}{' '}
                                  {event.userReceiving.displayName}
@@ -185,11 +192,81 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                         </div>
                      )
                   })}
-                  <span style={{ marginTop: '15px', fontSize: '.9rem' }}>
-                     Created By: {board.user.displayName}
-                  </span>
                </Container>
             </Container>
+            <span style={{ marginTop: '15px', fontSize: '.9rem' }}>
+               Created By: {board.user.displayName}
+            </span>
+         </Col>
+         <Col>
+            <h3>Create a new entry:</h3>
+            <div
+               style={{
+                  border: '1px solid red',
+               }}
+            >
+               <Form
+                  style={{
+                     display: 'flex',
+                     flexDirection: 'row',
+                     alignItems: 'end',
+                  }}
+               >
+                  <div style={{ border: '1px solid red', flexGrow: '1' }}>
+                     <Form.Group
+                        controlId="exampleForm.ControlSelect1"
+                        style={{ margin: '0' }}
+                     >
+                        <Form.Label>Person doing something</Form.Label>
+                        <Form.Control as="select">
+                           {data
+                              ? data.allUsers.data.map(user => {
+                                   return (
+                                      <option key={user._id}>
+                                         {user.displayName}
+                                      </option>
+                                   )
+                                })
+                              : ''}
+                        </Form.Control>
+                     </Form.Group>
+                  </div>
+                  <div
+                     style={{
+                        border: '1px solid red',
+                        padding: '0 15px 8px 15px',
+                     }}
+                  >
+                     {board.action}
+                  </div>
+                  <div style={{ border: '1px solid red', flexGrow: '1' }}>
+                     <Form.Group
+                        controlId="exampleForm.ControlSelect1"
+                        style={{ margin: '0' }}
+                     >
+                        <Form.Label>Example select</Form.Label>
+                        <Form.Control as="select">
+                           {data
+                              ? data.allUsers.data.map(user => {
+                                   return (
+                                      <option key={user._id}>
+                                         {user.displayName}
+                                      </option>
+                                   )
+                                })
+                              : ''}
+                        </Form.Control>
+                     </Form.Group>
+                  </div>
+                  <div
+                     style={{ border: '1px solid red', padding: '0 0 0 20px' }}
+                  >
+                     <Button variant="primary" type="submit">
+                        Submit
+                     </Button>
+                  </div>
+               </Form>
+            </div>
          </Col>
       </Container>
    )

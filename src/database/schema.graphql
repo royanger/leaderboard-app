@@ -9,7 +9,7 @@ type User {
 type Board {
    title: String
    description: String
-   config: String
+   config: Boolean
    action: String
    nonUser: String
    user: User
@@ -25,5 +25,6 @@ type Event {
 
 type Query {
    allBoards: [Board!]
+   allUsers: [User!]
    accountByUid(uid: String!): [User!]
 }

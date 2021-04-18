@@ -85,9 +85,9 @@ function Profile({
       console.log('board submitted')
 
       const id = _id
-      const configParsed = config ? 'yes' : 'no'
-      console.log(config ? 'yes' : 'no')
-      console.log('vars', id, title, description, configParsed, action)
+      // should no longer need this with schema change -- confirm
+      // const configParsed = config ? 'yes' : 'no'
+      console.log('vars', id, title, description, config, action)
 
       apolloClient
          .mutate({
@@ -96,7 +96,7 @@ function Profile({
                id,
                title,
                description,
-               configParsed,
+               config,
                action,
             },
          })
