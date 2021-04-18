@@ -5,6 +5,7 @@ import { apolloClient } from '../database/client'
 import { useQuery } from '@apollo/react-hooks'
 import {
    BOARD_QUERY,
+   CREATE_EVENT,
    EVENTS_QUERY,
    FIND_USERS_QUERY,
    UPDATE_EVENT_COUNT,
@@ -18,7 +19,9 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
    const [loading, setLoading] = React.useState(true)
    const [board, setBoard] = React.useState('')
    const [events, setEvents] = React.useState([])
-   const { loading: usersLoading, error, data } = useQuery(FIND_USERS_QUERY)
+   const { data } = useQuery(FIND_USERS_QUERY)
+   const [userDoing, setUserDoing] = React.useState('')
+   const [userReceiving, setUserReceiving] = React.useState('')
 
    React.useEffect(() => {
       apolloClient
@@ -78,9 +81,46 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
    }
 
    function handleSelect(user, type) {
-      console.log('dropdown selected')
-      console.log(user)
-      console.log(type)
+      if (type === 'userDoing') setUserDoing(user._id)
+      if (type === 'userReceiving') setUserReceiving(user._id)
+   }
+
+   function handleSubmit(e) {
+      e.preventDefault()
+      console.log('submitted')
+      if (!userDoing || !userReceiving) {
+         console.log('form not complete')
+      }
+      console.log('board', board._id)
+
+      apolloClient
+         .mutate({
+            mutation: CREATE_EVENT,
+            variables: {
+               board: board._id,
+               userDoing: userDoing,
+               userReceiving: userReceiving,
+               count: 1,
+            },
+         })
+         .then(results => {
+            console.log(results)
+            apolloClient
+               .mutate({
+                  mutation: EVENTS_QUERY,
+                  variables: {
+                     id: board._id,
+                  },
+               })
+               .then(results => {
+                  const sortedEvents = results.data.findBoardByID.events.data.sort(
+                     (a, b) => {
+                        return b.count - a.count
+                     }
+                  )
+                  setEvents(sortedEvents)
+               })
+         })
    }
 
    if (loading) {
@@ -202,28 +242,27 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                Created By: {board.user.displayName}
             </span>
          </Col>
-         <Col>
+         <Col style={{ marginTop: '50px' }}>
             <h3>Create a new entry:</h3>
-            <div
-               style={{
-                  border: '1px solid red',
-               }}
-            >
+            <div style={{}}>
                <Form
                   style={{
                      display: 'flex',
                      flexDirection: 'row',
                      alignItems: 'end',
                   }}
+                  onSubmit={handleSubmit}
                >
-                  <div style={{ border: '1px solid red', flexGrow: '1' }}>
+                  <div style={{ flexGrow: '1' }}>
                      <Form.Group
                         controlId="exampleForm.ControlSelect1"
                         style={{ margin: '0' }}
                      >
                         <Form.Label>Person doing something</Form.Label>
                         <Form.Control as="select">
-                           <option></option>
+                           <option
+                              onClick={() => handleSelect('', 'userDoing')}
+                           ></option>
                            {data
                               ? data.allUsers.data.map(user => {
                                    return (
@@ -244,20 +283,21 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                   </div>
                   <div
                      style={{
-                        border: '1px solid red',
                         padding: '0 15px 8px 15px',
                      }}
                   >
                      {board.action}
                   </div>
-                  <div style={{ border: '1px solid red', flexGrow: '1' }}>
+                  <div style={{ flexGrow: '1' }}>
                      <Form.Group
                         controlId="exampleForm.ControlSelect1"
                         style={{ margin: '0' }}
                      >
                         <Form.Label>Person the receiving end</Form.Label>
                         <Form.Control as="select">
-                           <option></option>
+                           <option
+                              onClick={() => handleSelect('', 'userReceiving')}
+                           ></option>
                            {data
                               ? data.allUsers.data.map(user => {
                                    return (
@@ -276,11 +316,9 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                         </Form.Control>
                      </Form.Group>
                   </div>
-                  <div
-                     style={{ border: '1px solid red', padding: '0 0 0 20px' }}
-                  >
+                  <div style={{ padding: '0 0 0 20px' }}>
                      <Button variant="primary" type="submit">
-                        Submit
+                        Create
                      </Button>
                   </div>
                </Form>

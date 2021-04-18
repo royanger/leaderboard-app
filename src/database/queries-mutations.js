@@ -179,6 +179,26 @@ export const UPDATE_EVENT_COUNT = gql`
    }
 `
 
+export const CREATE_EVENT = gql`
+   mutation createEvent(
+      $board: ID!
+      $userDoing: ID!
+      $userReceiving: ID!
+      $count: Int
+   ) {
+      createEvent(
+         data: {
+            board: { connect: $board }
+            userDoing: { connect: $userDoing }
+            userReceiving: { connect: $userReceiving }
+            count: $count
+         }
+      ) {
+         _id
+      }
+   }
+`
+
 export const FIND_USERS_QUERY = gql`
    query findAllUsers {
       allUsers {
