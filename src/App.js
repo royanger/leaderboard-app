@@ -40,7 +40,6 @@ function App() {
 
    // callback function for /profile when displayName changes. Avoid queries
    function updateDisplayName(displayName) {
-      console.log('func called', displayName)
       setUserInfo(prevInfo => ({ ...prevInfo, displayName }))
    }
 

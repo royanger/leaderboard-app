@@ -16,7 +16,7 @@ function Leaderboards({ userInfo }) {
       return <Loader />
    }
    if (error) {
-      console.log(error)
+      console.error(error)
    }
 
    return (

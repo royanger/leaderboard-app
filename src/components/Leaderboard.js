@@ -49,12 +49,10 @@ function Leaderboard({ board, userInfo: { _id, name, displayName } }) {
    }
 
    function handleIncrement(id, count) {
-      console.log('increment', id, count)
       updateEventCount(id, count + 1)
    }
 
    function handleDecrement(id, count) {
-      console.log('decrement', id, count)
       updateEventCount(id, count - 1)
    }
 

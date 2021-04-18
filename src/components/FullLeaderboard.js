@@ -27,6 +27,8 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
       text: '',
    })
 
+   console.log(board.config)
+
    React.useEffect(() => {
       apolloClient
          .mutate({
@@ -331,7 +333,6 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                      </Button>
                   </div>
                </Form>
-               <span></span>
                <span
                   style={{
                      fontSize: '.8rem',

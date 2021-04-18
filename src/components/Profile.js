@@ -34,17 +34,22 @@ function Profile({
    const loadLeaderboards = React.useCallback(() => {
       setLoading(true)
       setLeaderboards([])
-      apolloClient
-         .mutate({
-            mutation: BOARDS_QUERY,
-            variables: {
-               id: _id,
-            },
-         })
-         .then(results => {
-            setLeaderboards(results.data.findUserByID.boards.data)
-            setLoading(false)
-         })
+      // make sure the user data has loaded from prop before running the query, or it will error
+      // error would happen on reload / direct link to route/page
+      if (_id) {
+         console.log('do the query')
+         apolloClient
+            .mutate({
+               mutation: BOARDS_QUERY,
+               variables: {
+                  id: _id,
+               },
+            })
+            .then(results => {
+               setLeaderboards(results.data.findUserByID.boards.data)
+               setLoading(false)
+            })
+      }
    }, [_id])
 
    React.useEffect(() => {
@@ -82,12 +87,7 @@ function Profile({
 
    function handleBoardCreate(e) {
       e.preventDefault()
-      console.log('board submitted')
-
       const id = _id
-      // should no longer need this with schema change -- confirm
-      // const configParsed = config ? 'yes' : 'no'
-      console.log('vars', id, title, description, config, action)
 
       apolloClient
          .mutate({
@@ -110,7 +110,6 @@ function Profile({
    }
 
    function onBoardChange(e) {
-      console.log(e.target.id)
       if (e.target.id === 'title') setTitle(e.target.value)
       if (e.target.id === 'description') setDescription(e.target.value)
       if (e.target.id === 'action') setAction(e.target.value)

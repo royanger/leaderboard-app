@@ -61,7 +61,7 @@ export const CREATE_BOARD = gql`
       $id: ID
       $title: String
       $description: String
-      $config: String
+      $config: Boolean
       $action: String
    ) {
       createBoard(
