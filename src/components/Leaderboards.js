@@ -1,29 +1,37 @@
 import * as React from 'react'
 import { Container, Row } from 'react-bootstrap'
-import { useQuery } from '@apollo/react-hooks'
 import { ITEMS_QUERY } from '../database/queries-mutations'
+import { apolloClient } from '../database/client'
 
 // import components
 import Leaderboard from './Leaderboard'
 import Loader from './Loader'
 
-// our base query
-
 function Leaderboards({ userInfo }) {
-   const { data, error, loading } = useQuery(ITEMS_QUERY)
+   const [boards, setBoards] = React.useState([])
+   const [loading, setLoading] = React.useState(true)
+
+   React.useEffect(() => {
+      apolloClient
+         .mutate({
+            mutation: ITEMS_QUERY,
+         })
+         .then(results => {
+            console.log(results)
+            setBoards(results.data.allBoards.data)
+            setLoading(false)
+         })
+   }, [])
 
    if (loading) {
       return <Loader />
-   }
-   if (error) {
-      console.error(error)
    }
 
    return (
       <Container style={{ marginTop: '70px' }}>
          <h1>El Jeffe Leaderboards</h1>
          <Row noGutters={false}>
-            {data.allBoards.data.map(board => {
+            {boards.map(board => {
                return (
                   <Leaderboard
                      key={board._id}
