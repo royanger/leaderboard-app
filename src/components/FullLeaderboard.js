@@ -20,8 +20,6 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
    const [events, setEvents] = React.useState([])
    const { loading: usersLoading, error, data } = useQuery(FIND_USERS_QUERY)
 
-   console.log(data.allUsers.data)
-
    React.useEffect(() => {
       apolloClient
          .mutate({
@@ -77,6 +75,12 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
    function handleDecrement(id, count) {
       console.log('decrement', id, count)
       updateEventCount(id, count - 1)
+   }
+
+   function handleSelect(user, type) {
+      console.log('dropdown selected')
+      console.log(user)
+      console.log(type)
    }
 
    if (loading) {
@@ -219,10 +223,17 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                      >
                         <Form.Label>Person doing something</Form.Label>
                         <Form.Control as="select">
+                           <option></option>
                            {data
                               ? data.allUsers.data.map(user => {
                                    return (
-                                      <option key={user._id}>
+                                      <option
+                                         key={user._id}
+                                         id={user._id}
+                                         onClick={() =>
+                                            handleSelect(user, 'userDoing')
+                                         }
+                                      >
                                          {user.displayName}
                                       </option>
                                    )
@@ -244,12 +255,19 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                         controlId="exampleForm.ControlSelect1"
                         style={{ margin: '0' }}
                      >
-                        <Form.Label>Example select</Form.Label>
+                        <Form.Label>Person the receiving end</Form.Label>
                         <Form.Control as="select">
+                           <option></option>
                            {data
                               ? data.allUsers.data.map(user => {
                                    return (
-                                      <option key={user._id}>
+                                      <option
+                                         key={user._id}
+                                         id={user._id}
+                                         onClick={() =>
+                                            handleSelect(user, 'userReceiving')
+                                         }
+                                      >
                                          {user.displayName}
                                       </option>
                                    )
