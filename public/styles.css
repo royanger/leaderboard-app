@@ -22,3 +22,10 @@
 .btn-add:active {
    background-color: #084298;
 }
+
+.status {
+   color: #198754;
+}
+.error {
+   color: red;
+}

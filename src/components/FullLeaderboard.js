@@ -22,6 +22,10 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
    const { data } = useQuery(FIND_USERS_QUERY)
    const [userDoing, setUserDoing] = React.useState('')
    const [userReceiving, setUserReceiving] = React.useState('')
+   const [message, setMessage] = React.useState({
+      type: 'visually-hidden',
+      text: '',
+   })
 
    React.useEffect(() => {
       apolloClient
@@ -83,13 +87,17 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
    function handleSelect(user, type) {
       if (type === 'userDoing') setUserDoing(user._id)
       if (type === 'userReceiving') setUserReceiving(user._id)
+      setMessage({ type: 'visually-hidden', text: '' })
    }
 
    function handleSubmit(e) {
       e.preventDefault()
-      console.log('submitted')
+      setMessage({ type: 'status', text: 'Saving' })
+
       if (!userDoing || !userReceiving) {
          console.log('form not complete')
+         setMessage({ type: 'error', text: 'Please select both users' })
+         return
       }
       console.log('board', board._id)
 
@@ -120,6 +128,7 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                   )
                   setEvents(sortedEvents)
                })
+            setMessage({ type: 'status', text: 'Saved' })
          })
    }
 
@@ -239,12 +248,12 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                </Container>
             </Container>
             <span style={{ marginTop: '15px', fontSize: '.9rem' }}>
-               Created By: {board.user.displayName}
+               Board created by: {board.user.displayName}
             </span>
          </Col>
          <Col style={{ marginTop: '50px' }}>
             <h3>Create a new entry:</h3>
-            <div style={{}}>
+            <div style={{ marginTop: '20px' }}>
                <Form
                   style={{
                      display: 'flex',
@@ -322,6 +331,16 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                      </Button>
                   </div>
                </Form>
+               <span></span>
+               <span
+                  style={{
+                     fontSize: '.8rem',
+                     height: '.9rem',
+                  }}
+                  className={message.type}
+               >
+                  {message.text}
+               </span>
             </div>
          </Col>
       </Container>

@@ -101,8 +101,6 @@ function Profile({
             },
          })
          .then(results => {
-            console.log('board created')
-            console.log('results', results)
             loadLeaderboards()
             setTitle('')
             setDescription('')
