@@ -23,9 +23,9 @@ function Header({ name, isSignedIn, handleLogout }) {
                   <LinkContainer to="/">
                      <Nav.Link>Leaderboards</Nav.Link>
                   </LinkContainer>
-                  <LinkContainer to="/pubg">
+                  {/* <LinkContainer to="/pubg">
                      <Nav.Link>PUBG</Nav.Link>
-                  </LinkContainer>
+                  </LinkContainer> */}
                   {isSignedIn ? (
                      <NavDropdown title={name.name} id="username">
                         <LinkContainer to="/profile">

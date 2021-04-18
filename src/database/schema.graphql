@@ -3,6 +3,7 @@ type User {
    name: String
    displayName: String
    provider: String
+   pubgID: String
    boards: [Board] @relation
 }
 

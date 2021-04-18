@@ -1,3 +1,31 @@
+type People {
+   uid: String! @unique
+   name: String
+   displayName: String
+   provider: String
+   pubgID: String
+   boards: [Notice] @relation
+}
+
+type Notice {
+   title: String
+   description: String
+   config: Boolean
+   action: String
+   nonUser: String
+   user: People
+   party: [Party] @relation
+}
+
+type Party {
+   notice: Notice
+   userDoing: People
+   userReceiving: People
+   count: Int
+}
+
 type Query {
-   allUser: [User!]
+   allNotices: [Notice!]
+   allPeoples: [People!]
+   accountByThing(uid: String!): [People!]
 }
