@@ -27,7 +27,7 @@ function Header({ name, isSignedIn, handleLogout }) {
                      <Nav.Link>PUBG</Nav.Link>
                   </LinkContainer> */}
                   {isSignedIn ? (
-                     <NavDropdown title={name.name} id="username">
+                     <NavDropdown title={name.displayName} id="username">
                         <LinkContainer to="/profile">
                            <NavDropdown.Item>Profile</NavDropdown.Item>
                         </LinkContainer>
