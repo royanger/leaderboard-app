@@ -296,8 +296,7 @@ function Profile({
                <div style={{ marginTop: '30px' }}>
                   <strong>Preview:</strong>
                   <br />
-                  PlayerUnkown {action ? action : '<empty>'}{' '}
-                  {config ? 'WittiestUserNameEver' : ''}
+                  Trae {action ? action : '<empty>'} {config ? 'Dazed898' : ''}
                </div>
 
                <button

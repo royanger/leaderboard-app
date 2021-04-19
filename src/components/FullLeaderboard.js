@@ -172,7 +172,7 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                         margin: '0 -10px 20px',
                      }}
                   >
-                     <Col>Test</Col>
+                     <Col></Col>
                      <Col xs="auto">Count</Col>
                   </Row>
                   {events.map(event => {
