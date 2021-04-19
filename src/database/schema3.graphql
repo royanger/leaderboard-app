@@ -1,4 +1,0 @@
-type Query {
-   allTodos: [Todo!]
-   todosByCompletedFlag(completed: Boolean!): [Todo!]
-}
