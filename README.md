@@ -5,5 +5,4 @@ A simple project combining React, GraphQL and FaunaDB to provide a fun leaderboa
 ## How does it work?
 
 Auth is handled via Google Firebase
-The DB is FaunaDB, and all queries and mutations are done through Graphql with the Apollo Client.\_dialog_overlay
-The frontend is a simple React app, with no SSG or SSR
+The DB is FaunaDB, and all queries and mutations are done through Graphql with the Apollo Client. The frontend is a simple React app, with no SSG or SSR
