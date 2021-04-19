@@ -87,12 +87,6 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
       updateEventCount(id, count - 1)
    }
 
-   function handleSelect(user, type) {
-      if (type === 'userDoing') setUserDoing(user._id)
-      if (type === 'userReceiving') setUserReceiving(user._id)
-      setMessage({ type: 'visually-hidden', text: '' })
-   }
-
    function handleSubmit(e) {
       e.preventDefault()
       setMessage({ type: 'status', text: 'Saving' })
@@ -271,34 +265,28 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
          <Col style={{ marginTop: '50px' }}>
             <h3>Create a new entry:</h3>
             <div style={{ marginTop: '20px' }}>
-               <Form
-                  style={{
-                     display: 'flex',
-                     flexDirection: 'row',
-                     alignItems: 'end',
-                  }}
-                  onSubmit={handleSubmit}
-               >
+               <Form className="addevent" onSubmit={handleSubmit}>
                   <div style={{ flexGrow: '1' }}>
                      <Form.Group
                         controlId="exampleForm.ControlSelect1"
                         style={{ margin: '0' }}
                      >
                         <Form.Label>Person doing something</Form.Label>
-                        <Form.Control as="select">
-                           <option
-                              onClick={() => handleSelect('', 'userDoing')}
-                           ></option>
+                        <Form.Control
+                           as="select"
+                           onChange={e => {
+                              setUserDoing(
+                                 e.target.options[
+                                    e.target.options.selectedIndex
+                                 ].id
+                              )
+                           }}
+                        >
+                           <option id=""></option>
                            {data
                               ? data.allUsers.data.map(user => {
                                    return (
-                                      <option
-                                         key={user._id}
-                                         id={user._id}
-                                         onClick={() =>
-                                            handleSelect(user, 'userDoing')
-                                         }
-                                      >
+                                      <option key={user._id} id={user._id}>
                                          {user.displayName}
                                       </option>
                                    )
@@ -321,25 +309,21 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                            style={{ margin: '0' }}
                         >
                            <Form.Label>Person the receiving end</Form.Label>
-                           <Form.Control as="select">
-                              <option
-                                 onClick={() =>
-                                    handleSelect('', 'userReceiving')
-                                 }
-                              ></option>
+                           <Form.Control
+                              as="select"
+                              onChange={e => {
+                                 setUserReceiving(
+                                    e.target.options[
+                                       e.target.options.selectedIndex
+                                    ].id
+                                 )
+                              }}
+                           >
+                              <option id=""></option>
                               {data
                                  ? data.allUsers.data.map(user => {
                                       return (
-                                         <option
-                                            key={user._id}
-                                            id={user._id}
-                                            onClick={() =>
-                                               handleSelect(
-                                                  user,
-                                                  'userReceiving'
-                                               )
-                                            }
-                                         >
+                                         <option key={user._id} id={user._id}>
                                             {user.displayName}
                                          </option>
                                       )

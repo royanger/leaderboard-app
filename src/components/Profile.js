@@ -30,6 +30,7 @@ function Profile({
    const [action, setAction] = React.useState('')
    const [config, setConfig] = React.useState(false)
    const [loading, setLoading] = React.useState(false)
+   const [checked, setChecked] = React.useState(false)
 
    const loadLeaderboards = React.useCallback(() => {
       setLoading(true)
@@ -105,6 +106,7 @@ function Profile({
             setDescription('')
             setAction('')
             setConfig(false)
+            setChecked(false)
          })
    }
 
@@ -116,6 +118,7 @@ function Profile({
 
    function onClick(e) {
       setConfig(!config)
+      setChecked(!checked)
    }
 
    function deleteBoard(id) {
@@ -276,6 +279,7 @@ function Profile({
                   type="checkbox"
                   id="action"
                   name="action"
+                  checked={checked}
                   value={config}
                   onChange={onClick}
                   style={{ marginTop: '15px' }}
