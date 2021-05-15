@@ -28,7 +28,7 @@ function Leaderboards({ userInfo }) {
 
    return (
       <Container style={{ marginTop: '70px' }}>
-         <h1>El Jeffe Leaderboards</h1>
+         <h1>{process.env.REACT_APP_SITE_TITLE}</h1>
          <Row noGutters={false}>
             {boards.map(board => {
                return (
