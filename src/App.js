@@ -8,12 +8,15 @@ import { firebaseConfig, uiConfig } from './auth/firebase'
 import { manageUser } from './lib/manageUser'
 
 // import components
-import Header from './components/Header'
-import Login from './components/Login'
-import Profile from './components/Profile'
-import Leaderboards from './components/Leaderboards'
-import FullLeaderboard from './components/FullLeaderboard'
+import Header from './components/header/Header'
+import Login from './components/profile/Login'
+import Profile from './components/profile/Profile'
+import Leaderboards from './components/leaderboard/Leaderboards'
+import FullLeaderboard from './components/leaderboard/FullLeaderboard'
 import Pubg from './components/pubg'
+
+// import scss
+import './styles.scss'
 
 // don't try to initialize if already initialized. That's just rude.
 if (!firebase.apps.length) {
@@ -53,8 +56,8 @@ function App() {
                   const results = await manageUser({
                      uid: firebase.auth().currentUser.uid,
                      name: firebase.auth().currentUser.displayName,
-                     provider: firebase.auth().currentUser.providerData[0]
-                        .providerId,
+                     provider:
+                        firebase.auth().currentUser.providerData[0].providerId,
                   })
                   const { _id, uid, name, displayName } = results
                   setUserInfo({ _id, uid, name, displayName })

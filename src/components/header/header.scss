@@ -1,0 +1,11 @@
+.header {
+   display: flex;
+   width: 100%;
+   background-color: $brand-primary;
+   padding: 1em 3em;
+
+   brand {
+      color: $text-secondary;
+      font-size: 3em;
+   }
+}

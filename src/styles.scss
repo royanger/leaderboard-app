@@ -1,0 +1,18 @@
+@import-normalize;
+
+/* brand colours */
+$brand-primary: #3a0ca3;
+$brand-secondary: #560bad;
+$brand-accent: #4cc9f0;
+
+/* text, bg and basic colours */
+$text-primary: rgb(27, 27, 27);
+$text-secondary: rgb(233, 233, 233);
+$text-alert: #f72585;
+
+$grey-primary: rgb(48, 43, 43);
+$grey-secondary: rgb(90, 86, 86);
+
+@import './components/header/header.scss';
+@import './components/leaderboard/leaderboard.scss';
+@import './components/profile/profile.scss';

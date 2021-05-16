@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { Container, Row } from 'react-bootstrap'
-import { ITEMS_QUERY } from '../database/queries-mutations'
-import { apolloClient } from '../database/client'
+import { ITEMS_QUERY } from '../../database/queries-mutations'
+import { apolloClient } from '../../database/client'
 
 // import components
 import Leaderboard from './Leaderboard'
-import Loader from './Loader'
+import Loader from '../Loader'
 
 function Leaderboards({ userInfo }) {
    const [boards, setBoards] = React.useState([])

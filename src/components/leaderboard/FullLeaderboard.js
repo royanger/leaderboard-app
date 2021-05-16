@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useParams } from 'react-router-dom'
 import { Container, Col, Row, Form, Button } from 'react-bootstrap'
-import { apolloClient } from '../database/client'
+import { apolloClient } from '../../database/client'
 import { useQuery } from '@apollo/react-hooks'
 import {
    BOARD_QUERY,
@@ -10,10 +10,10 @@ import {
    EVENTS_QUERY,
    FIND_USERS_QUERY,
    UPDATE_EVENT_COUNT,
-} from '../database/queries-mutations.js'
+} from '../../database/queries-mutations.js'
 
 // import components
-import Loader from './Loader'
+import Loader from '../Loader'
 
 function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
    const { id } = useParams()
@@ -67,11 +67,10 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                   },
                })
                .then(results => {
-                  const sortedEvents = results.data.findBoardByID.events.data.sort(
-                     (a, b) => {
+                  const sortedEvents =
+                     results.data.findBoardByID.events.data.sort((a, b) => {
                         return b.count - a.count
-                     }
-                  )
+                     })
                   setEvents(sortedEvents)
                })
          })
@@ -129,11 +128,10 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                   },
                })
                .then(results => {
-                  const sortedEvents = results.data.findBoardByID.events.data.sort(
-                     (a, b) => {
+                  const sortedEvents =
+                     results.data.findBoardByID.events.data.sort((a, b) => {
                         return b.count - a.count
-                     }
-                  )
+                     })
                   setEvents(sortedEvents)
                })
             setMessage({ type: 'status', text: 'Saved' })

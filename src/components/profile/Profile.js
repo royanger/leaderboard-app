@@ -1,16 +1,16 @@
 import * as React from 'react'
 import { Container } from 'react-bootstrap'
-import { apolloClient } from '../database/client'
+import { apolloClient } from '../../database/client'
 import {
    BOARDS_QUERY,
    UPDATE_DISPLAY_NAME,
    CREATE_BOARD,
    DELETE_BOARD,
-} from '../database/queries-mutations.js'
+} from '../../database/queries-mutations.js'
 import { Spinner } from 'react-bootstrap'
 
 // import components
-import LeaderboardListItem from './LeaderboardListItem'
+import LeaderboardListItem from '../leaderboard/LeaderboardListItem'
 
 function Profile({
    userInfo: { _id, uid, name, displayName },

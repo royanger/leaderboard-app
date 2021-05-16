@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { Container, Col, Row } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import { apolloClient } from '../database/client'
+import { apolloClient } from '../../database/client'
 import {
    EVENTS_QUERY,
    UPDATE_EVENT_COUNT,
-} from '../database/queries-mutations.js'
+} from '../../database/queries-mutations.js'
 
 function Leaderboard({ board, userInfo: { _id, name, displayName } }) {
    const [events, setEvents] = React.useState([])
@@ -38,11 +38,10 @@ function Leaderboard({ board, userInfo: { _id, name, displayName } }) {
                   },
                })
                .then(results => {
-                  const sortedEvents = results.data.findBoardByID.events.data.sort(
-                     (a, b) => {
+                  const sortedEvents =
+                     results.data.findBoardByID.events.data.sort((a, b) => {
                         return b.count - a.count
-                     }
-                  )
+                     })
                   setEvents(sortedEvents)
                })
          })
