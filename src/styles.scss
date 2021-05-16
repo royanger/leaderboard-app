@@ -1,17 +1,34 @@
 @import-normalize;
 
-/* brand colours */
+/**
+ * Brand colours
+ */
 $brand-primary: #3a0ca3;
-$brand-secondary: #560bad;
+$brand-secondary: #7728d1;
+$brand-tertiary: #9c56ec;
 $brand-accent: #4cc9f0;
 
-/* text, bg and basic colours */
+/**
+ * Text, bg and basic colours
+ */
 $text-primary: rgb(27, 27, 27);
 $text-secondary: rgb(233, 233, 233);
 $text-alert: #f72585;
 
 $grey-primary: rgb(48, 43, 43);
 $grey-secondary: rgb(90, 86, 86);
+
+/**
+ * Utuility classes for layout/all components
+ */
+
+.wrapper {
+   max-width: 1440px;
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
 
 @import './components/header/header.scss';
 @import './components/leaderboard/leaderboard.scss';

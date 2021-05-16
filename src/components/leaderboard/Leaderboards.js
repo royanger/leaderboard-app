@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Container, Row } from 'react-bootstrap'
 import { ITEMS_QUERY } from '../../database/queries-mutations'
 import { apolloClient } from '../../database/client'
 
@@ -27,21 +26,23 @@ function Leaderboards({ userInfo }) {
    }
 
    return (
-      <Container style={{ marginTop: '70px' }}>
-         <h1>{process.env.REACT_APP_SITE_TITLE}</h1>
-         <Row noGutters={false}>
-            {boards.map(board => {
-               return (
-                  <Leaderboard
-                     key={board._id}
-                     board={board}
-                     userInfo={userInfo}
-                     standalone={false}
-                  />
-               )
-            })}
-         </Row>
-      </Container>
+      <article className="leaderboards">
+         <div className="wrapper">
+            <h1>All Leaderboards</h1>
+            <div className="boards">
+               {boards.map(board => {
+                  return (
+                     <Leaderboard
+                        key={board._id}
+                        board={board}
+                        userInfo={userInfo}
+                        standalone={false}
+                     />
+                  )
+               })}
+            </div>
+         </div>
+      </article>
    )
 }
 

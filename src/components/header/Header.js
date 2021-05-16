@@ -1,35 +1,37 @@
 import * as React from 'react'
-import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'react-router-dom'
 
 function Header({ name, isSignedIn, handleLogout }) {
    return (
-      <div className="wrapper">
-         <header className="header">
-            <LinkContainer to="/">
+      <header className="header">
+         <div className="wrapper">
+            <Link to="/">
                <brand>{process.env.REACT_APP_SITE_TITLE}</brand>
-            </LinkContainer>
+            </Link>
             <nav>
                <div>
-                  <LinkContainer to="/">
-                     <Nav.Link>Leaderboards</Nav.Link>
-                  </LinkContainer>
-
-                  {isSignedIn ? (
-                     <>
-                        <span>{name.displayName}</span>
-                        <LinkContainer to="/profile">
-                           <NavDropdown.Item>Profile</NavDropdown.Item>
-                        </LinkContainer>
-                        <button onClick={handleLogout}>Logout</button>
-                     </>
-                  ) : (
-                     ''
-                  )}
+                  <ul>
+                     <li>
+                        <Link to="/">Leaderboards</Link>
+                     </li>
+                     {isSignedIn ? (
+                        <>
+                           <li>
+                              <span>{name.displayName}</span>
+                           </li>
+                           <div className="dropdown">
+                              <Link to="/profile">Profile</Link>
+                              <button onClick={handleLogout}>Logout</button>
+                           </div>
+                        </>
+                     ) : (
+                        ''
+                     )}
+                  </ul>
                </div>
             </nav>
-         </header>
-      </div>
+         </div>
+      </header>
    )
 }
 

@@ -1,0 +1,60 @@
+.leaderboards {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+
+   .wrapper {
+      flex-direction: column;
+   }
+   .boards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 50px;
+   }
+
+   .board {
+      border: 1px solid $grey-secondary;
+      margin-top: 20px;
+
+      .title {
+         background-color: $grey-primary;
+         padding: 10px;
+
+         h3 {
+            font-size: 1.4rem;
+            color: $text-secondary;
+         }
+      }
+
+      .info {
+         padding: 10px;
+         font-size: 1.3rem;
+         font-style: italic;
+      }
+
+      .info.small {
+         font-size: 0.9rem;
+      }
+
+      .records {
+         font-size: 1.2rem;
+
+         .record {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            margin-bottom: 3px;
+            padding: 0 10px 2px 10px;
+
+            .action {
+            }
+
+            .count {
+            }
+         }
+
+         .record.odd {
+            background-color: rgba($brand-primary, 0.1);
+         }
+      }
+   }
+}
