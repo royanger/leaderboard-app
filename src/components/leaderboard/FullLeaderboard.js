@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { useParams } from 'react-router-dom'
-import { Container, Col, Row, Form, Button } from 'react-bootstrap'
 import { apolloClient } from '../../database/client'
 import { useQuery } from '@apollo/react-hooks'
 import {
@@ -143,172 +142,129 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
    }
 
    return (
-      <Container style={{ marginTop: '90px' }}>
-         <h3>{board.title}</h3>
-         <p>{board.description}</p>
+      <article className="leaderboard">
+         <div className="wrapper">
+            <h1>{board.title}</h1>
+            <p className="info">{board.description}</p>
+            <div className="board">
+               <div className="header">
+                  <div>Action</div>
+                  <div>Count</div>
+               </div>
 
-         <Col lg={12} style={{ padding: '0' }}>
-            <Container
-               style={{
-                  border: '1px solid gray',
-                  margin: '20px 0',
-                  padding: '0 0 20px 0',
-               }}
-            >
-               <Container
-                  style={{
-                     color: 'f8f9fa',
-                     padding: '0 10px 10px 10px',
-                     fontSize: '1.2rem',
-                  }}
-               >
-                  <Row
-                     style={{
-                        backgroundColor: '#343a40',
-                        color: '#f8f9fa',
-                        padding: '10px',
-                        margin: '0 -10px 20px',
-                     }}
-                  >
-                     <Col></Col>
-                     <Col xs="auto">Count</Col>
-                  </Row>
-                  {events.map(event => {
-                     return (
-                        <div
-                           key={event._id}
-                           style={{
-                              borderBottom: '1px solid rgba(52,58,64,.3)',
-                              marginBottom: '3px',
-                              paddingBottom: '2px',
-                           }}
-                        >
-                           <Row
-                              style={{
-                                 color: '#343a40',
-                              }}
-                           >
-                              <Col>
-                                 {event.userDoing.displayName} {board.action}{' '}
-                                 {board.config
-                                    ? event.userReceiving.displayName
-                                    : ''}
-                              </Col>
-                              <Col xs="auto">
-                                 {event.count}
-                                 {_id === event.userDoing._id ||
-                                 (event.userReceiving &&
-                                    _id === event.userReceiving._id) ? (
-                                    <>
-                                       <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          style={{
-                                             height: '1.35rem',
-                                             width: 'auto',
-                                             marginLeft: '5px',
-                                             color: '#198754',
-                                          }}
-                                          onClick={() =>
-                                             handleIncrement(
-                                                event._id,
-                                                event.count
-                                             )
-                                          }
-                                          viewBox="0 0 20 20"
-                                          fill="currentColor"
-                                       >
-                                          <path
-                                             fillRule="evenodd"
-                                             d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-                                             clipRule="evenodd"
-                                          />
-                                       </svg>
-                                       <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          style={{
-                                             height: '1.35rem',
-                                             width: 'auto',
-                                             color: 'red',
-                                          }}
-                                          onClick={() =>
-                                             handleDecrement(
-                                                event._id,
-                                                event.count
-                                             )
-                                          }
-                                          viewBox="0 0 20 20"
-                                          fill="currentColor"
-                                       >
-                                          <path
-                                             fillRule="evenodd"
-                                             d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
-                                             clipRule="evenodd"
-                                          />
-                                       </svg>
-                                    </>
-                                 ) : (
-                                    ''
-                                 )}
-                              </Col>
-                           </Row>
+               {events.map((event, i) => {
+                  return (
+                     <div
+                        key={event._id}
+                        className={`entry ${i % 2 ? 'odd' : 'even'}`}
+                     >
+                        <div>
+                           {event.userDoing.displayName} {board.action}{' '}
+                           {board.config ? event.userReceiving.displayName : ''}
                         </div>
-                     )
-                  })}
-               </Container>
-            </Container>
-            <span style={{ marginTop: '15px', fontSize: '.9rem' }}>
+                        <div>
+                           {event.count}
+                           {_id === event.userDoing._id ||
+                           (event.userReceiving &&
+                              _id === event.userReceiving._id) ? (
+                              <>
+                                 <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    style={{
+                                       height: '1.35rem',
+                                       width: 'auto',
+                                       marginLeft: '5px',
+                                       color: '#198754',
+                                    }}
+                                    onClick={() =>
+                                       handleIncrement(event._id, event.count)
+                                    }
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                 >
+                                    <path
+                                       fillRule="evenodd"
+                                       d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                                       clipRule="evenodd"
+                                    />
+                                 </svg>
+                                 <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    style={{
+                                       height: '1.35rem',
+                                       width: 'auto',
+                                       color: 'red',
+                                    }}
+                                    onClick={() =>
+                                       handleDecrement(event._id, event.count)
+                                    }
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                 >
+                                    <path
+                                       fillRule="evenodd"
+                                       d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
+                                       clipRule="evenodd"
+                                    />
+                                 </svg>
+                              </>
+                           ) : (
+                              ''
+                           )}
+                        </div>
+                     </div>
+                  )
+               })}
+            </div>
+            <span className="info small">
                Board created by: {board.user.displayName}
             </span>
-         </Col>
-         <Col style={{ marginTop: '50px' }}>
-            <h3>Create a new entry:</h3>
-            <div style={{ marginTop: '20px' }}>
-               <Form className="addevent" onSubmit={handleSubmit}>
-                  <div style={{ flexGrow: '1' }}>
-                     <Form.Group
-                        controlId="exampleForm.ControlSelect1"
-                        style={{ margin: '0' }}
+            <div className="create-new">
+               <h3 className="title">Create a new entry:</h3>
+
+               <div className="form">
+                  <form className="addevent" onSubmit={handleSubmit}>
+                     <label htmlFor="userDoingList" className="visually-hidden">
+                        Person doing something
+                     </label>
+                     <select
+                        id="userDoingList"
+                        onChange={e => {
+                           setUserDoing(
+                              e.target.options[e.target.options.selectedIndex]
+                                 .id
+                           )
+                        }}
                      >
-                        <Form.Label>Person doing something</Form.Label>
-                        <Form.Control
-                           as="select"
-                           onChange={e => {
-                              setUserDoing(
-                                 e.target.options[
-                                    e.target.options.selectedIndex
-                                 ].id
-                              )
-                           }}
-                        >
-                           <option id=""></option>
-                           {data
-                              ? data.allUsers.data.map(user => {
-                                   return (
-                                      <option key={user._id} id={user._id}>
-                                         {user.displayName}
-                                      </option>
-                                   )
-                                })
-                              : ''}
-                        </Form.Control>
-                     </Form.Group>
-                  </div>
-                  <div
-                     style={{
-                        padding: '0 15px 8px 15px',
-                     }}
-                  >
-                     {board.action}
-                  </div>
-                  {board.config ? (
-                     <div style={{ flexGrow: '1' }}>
-                        <Form.Group
-                           controlId="exampleForm.ControlSelect1"
-                           style={{ margin: '0' }}
-                        >
-                           <Form.Label>Person the receiving end</Form.Label>
-                           <Form.Control
-                              as="select"
+                        <option id=""></option>
+                        {data
+                           ? data.allUsers.data.map(user => {
+                                return (
+                                   <option key={user._id} id={user._id}>
+                                      {user.displayName}
+                                   </option>
+                                )
+                             })
+                           : ''}
+                     </select>
+
+                     <div
+                        style={{
+                           padding: '0 15px 8px 15px',
+                        }}
+                     >
+                        {board.action}
+                     </div>
+                     {board.config ? (
+                        <>
+                           <label
+                              htmlFor="userReceivingList"
+                              className="visually-hidden"
+                           >
+                              Person the receiving end
+                           </label>
+                           <select
+                              id="userReceivingList"
                               onChange={e => {
                                  setUserReceiving(
                                     e.target.options[
@@ -327,30 +283,28 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                                       )
                                    })
                                  : ''}
-                           </Form.Control>
-                        </Form.Group>
+                           </select>
+                        </>
+                     ) : (
+                        ''
+                     )}
+                     <div style={{ padding: '0 0 0 20px' }}>
+                        <button>Create</button>
                      </div>
-                  ) : (
-                     ''
-                  )}
-                  <div style={{ padding: '0 0 0 20px' }}>
-                     <Button variant="primary" type="submit">
-                        Create
-                     </Button>
-                  </div>
-               </Form>
-               <span
-                  style={{
-                     fontSize: '.8rem',
-                     height: '.9rem',
-                  }}
-                  className={message.type}
-               >
-                  {message.text}
-               </span>
+                  </form>
+                  <span
+                     style={{
+                        fontSize: '.8rem',
+                        height: '.9rem',
+                     }}
+                     className={message.type}
+                  >
+                     {message.text}
+                  </span>
+               </div>
             </div>
-         </Col>
-      </Container>
+         </div>
+      </article>
    )
 }
 
