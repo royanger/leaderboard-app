@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Container } from 'react-bootstrap'
 import { apolloClient } from '../../database/client'
 import {
    BOARDS_QUERY,
@@ -58,7 +57,7 @@ function Profile({
 
    function handleDisplayNameSubmit(e) {
       e.preventDefault()
-      // the 'data' returned from the hooks was a pain to work with on re-renders. This is much cleaner
+      // the 'data' returned from the Apollo Client hooks was a pain to work with on re-renders. This is much cleaner
       apolloClient
          .mutate({
             mutation: UPDATE_DISPLAY_NAME,
@@ -135,215 +134,136 @@ function Profile({
    }
 
    return (
-      <>
-         <Container style={{ marginTop: '90px' }}>
-            <h2>Profile</h2>
+      <div className="profile-page">
+         <div className="wrapper">
+            <div className="profile">
+               <h1>Profile</h1>
 
-            <h3 style={{ fontSize: '1.25rem', marginTop: '40px' }}>
-               Change Display Name
-            </h3>
-            <form
-               onSubmit={handleDisplayNameSubmit}
-               style={{
-                  display: 'inline-block',
-                  border: '1px solid gray',
-                  padding: '15px 30px',
-                  marginTop: '10px',
-                  width: '100%',
-               }}
-            >
-               <label
-                  htmlFor="displayname"
-                  name="Change Display Name"
-                  style={{ marginBottom: '0', minWidth: '80%' }}
-               >
-                  Change the name that is displayed to other users
-                  <input
-                     style={{
-                        padding: '5px 10px',
-                        border: '2px solid #007bff',
-                        width: '100%',
-                        display: 'inline-block',
-                     }}
-                     type="text"
-                     id="displayname"
-                     value={newDisplayName}
-                     onChange={onDisplayNameChange}
-                  />
-               </label>
-               <button
-                  type="submit"
-                  disabled={displayNameInfo.status}
-                  className="btn-save"
-               >
-                  Save
-               </button>
-               <br />
-               <span
-                  style={{
-                     fontSize: '.8rem',
-                     height: '.9rem',
-                     color: '#198754',
-                  }}
-                  className={displayNameInfo.class}
-               >
-                  Saved
-               </span>
+               <div className="display-name">
+                  <h3>Change Display Name</h3>
+                  <form onSubmit={handleDisplayNameSubmit}>
+                     <label htmlFor="displayname" name="Change Display Name">
+                        Change the name that is displayed to other users
+                        <input
+                           type="text"
+                           id="displayname"
+                           value={newDisplayName}
+                           onChange={onDisplayNameChange}
+                        />
+                     </label>
+                     <button type="submit" disabled={displayNameInfo.status}>
+                        Save
+                     </button>
+                     <br />
+                     <span className={`${displayNameInfo.class} save`}>
+                        Saved
+                     </span>
 
-               <br />
-            </form>
+                     <br />
+                  </form>
+               </div>
+               <div className="create-leaderboard">
+                  <h3>Add Leaderboard</h3>
+                  <form onSubmit={handleBoardCreate}>
+                     <label htmlFor="title" name="Leaderboard Title">
+                        Title
+                        <input
+                           type="text"
+                           id="title"
+                           value={title}
+                           onChange={onBoardChange}
+                        />
+                     </label>
+                     <label
+                        htmlFor="description"
+                        name="Leaderboard Description"
+                     >
+                        Description
+                        <input
+                           type="text"
+                           id="description"
+                           value={description}
+                           onChange={onBoardChange}
+                        />
+                     </label>
+                     <label htmlFor="action" name="Set action for Leaderboard">
+                        The action that happened
+                        <input
+                           type="text"
+                           id="action"
+                           value={action}
+                           onChange={onBoardChange}
+                        />
+                     </label>
 
-            <h3 style={{ fontSize: '1.25rem', marginTop: '40px' }}>
-               Add Leaderboard
-            </h3>
-            <form
-               onSubmit={handleBoardCreate}
-               style={{
-                  display: 'inline-block',
-                  border: '1px solid gray',
-                  padding: '15px 30px',
-                  marginTop: '10px',
-                  width: '100%',
-               }}
-            >
-               <label
-                  htmlFor="title"
-                  name="Leaderboard Title"
-                  style={{
-                     display: 'block',
-                     marginBottom: '0',
-                     minWidth: '100%',
-                  }}
-               >
-                  Title
-                  <input
-                     style={{
-                        padding: '5px 10px',
-                        border: '2px solid #007bff',
-                        width: '100%',
-                        marginBottom: '15px',
-                     }}
-                     type="text"
-                     id="title"
-                     value={title}
-                     onChange={onBoardChange}
-                  />
-               </label>
-               <label
-                  htmlFor="description"
-                  name="Leaderboard Description"
-                  style={{
-                     display: 'block',
-                     marginBottom: '0',
-                     minWidth: '100%',
-                  }}
-               >
-                  Description
-                  <input
-                     style={{
-                        padding: '5px 10px',
-                        border: '2px solid #007bff',
-                        width: '100%',
-                        marginBottom: '15px',
-                     }}
-                     type="text"
-                     id="description"
-                     value={description}
-                     onChange={onBoardChange}
-                  />
-               </label>
-               <label
-                  htmlFor="action"
-                  name="Set action for Leaderboard"
-                  style={{
-                     display: 'block',
-                     marginBottom: '0',
-                     minWidth: '100%',
-                  }}
-               >
-                  The action that happened
-                  <input
-                     style={{
-                        padding: '5px 10px',
-                        border: '2px solid #007bff',
-                        width: '100%',
-                        marginBottom: '15px',
-                     }}
-                     type="text"
-                     id="action"
-                     value={action}
-                     onChange={onBoardChange}
-                  />
-               </label>
-               <input
-                  type="checkbox"
-                  id="action"
-                  name="action"
-                  checked={checked}
-                  value={config}
-                  onChange={onClick}
-                  style={{ marginTop: '15px' }}
-               />
-               <label
-                  htmlFor="config"
-                  name="Configure action"
-                  style={{ margin: '15px 0 0 15px' }}
-               >
-                  Click to make this board a User vs User board. See preview for
-                  details.
-               </label>
+                     <div className="checkbox">
+                        <input
+                           type="checkbox"
+                           id="action"
+                           name="action"
+                           checked={checked}
+                           value={config}
+                           onChange={onClick}
+                        />
 
-               <div style={{ marginTop: '30px' }}>
-                  <strong>Preview:</strong>
-                  <br />
-                  Trae {action ? action : '<empty>'} {config ? 'Dazed898' : ''}
+                        <label htmlFor="config" name="Configure action">
+                           <span className="indicator" onClick={onClick}></span>
+                           Click to make this board a User vs User board. See
+                           preview for details.
+                        </label>
+                     </div>
+
+                     <div style={{ marginTop: '30px' }}>
+                        <strong>Preview:</strong>
+                        <br />
+                        Trae {action ? action : '<empty>'}{' '}
+                        {config ? 'Dazed898' : ''}
+                     </div>
+
+                     <button
+                        type="submit"
+                        disabled={displayNameInfo.status}
+                        className="btn-add"
+                     >
+                        Add
+                     </button>
+                  </form>
                </div>
 
-               <button
-                  type="submit"
-                  disabled={displayNameInfo.status}
-                  className="btn-add"
-               >
-                  Add
-               </button>
-            </form>
-         </Container>
-         <Container>
-            <h3 style={{ fontSize: '1.25rem', marginTop: '40px' }}>
-               Existing Leaderboards
-            </h3>
-            <div
-               style={{
-                  display: 'inline-block',
-                  border: '1px solid gray',
-                  padding: '15px 30px',
-                  marginTop: '10px',
-                  width: '100%',
-               }}
-            >
-               {loading ? (
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
-                     <Spinner animation="border" role="status" size="lg">
-                        <span className="sr-only">Loading...</span>
-                     </Spinner>
+               <div className="owned-leaderboards">
+                  <h3>Existing Leaderboards</h3>
+
+                  <div>
+                     {loading ? (
+                        <div
+                           style={{ display: 'flex', justifyContent: 'center' }}
+                        >
+                           <Spinner animation="border" role="status" size="lg">
+                              <span className="sr-only">Loading...</span>
+                           </Spinner>
+                        </div>
+                     ) : (
+                        ''
+                     )}
+
+                     {leaderboards ? 'ASDFASFDSADF' : 'adsfdasdf'}
+
+                     {leaderboards
+                        ? leaderboards.map(board => {
+                             return (
+                                <LeaderboardListItem
+                                   key={board._id}
+                                   board={board}
+                                   onClick={deleteBoard}
+                                />
+                             )
+                          })
+                        : ''}
                   </div>
-               ) : (
-                  ''
-               )}
-               {leaderboards
-                  ? leaderboards.map(board => {
-                       return (
-                          <LeaderboardListItem
-                             key={board._id}
-                             board={board}
-                             onClick={deleteBoard}
-                          />
-                       )
-                    })
-                  : ''}
+               </div>
             </div>
-         </Container>
-      </>
+         </div>
+      </div>
    )
 }
 

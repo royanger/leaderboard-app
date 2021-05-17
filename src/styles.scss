@@ -20,7 +20,31 @@ $grey-secondary: #5a5656;
 $grey-light: #e2e2e2;
 
 /**
- * Utuility classes for layout/all components
+ * Fonts and any other base settings
+ */
+
+body {
+   font-family: 'Open Sans', serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   font-family: 'Ubuntu', sans-serif;
+}
+.visually-hidden {
+   clip: rect(0 0 0 0);
+   clip-path: inset(50%);
+   height: 1px;
+   width: 1px;
+   position: absolute;
+   white-space: nowrap;
+}
+
+/**
+ * Utility classes for layout/all components
  */
 
 .wrapper {

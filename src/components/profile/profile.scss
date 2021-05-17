@@ -1,0 +1,108 @@
+.profile-page {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
+
+.profile {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   width: 100%;
+   display: grid;
+   grid-gap: 1rem;
+   grid-template-columns: 1fr 1fr;
+
+   h1 {
+      grid-column: 1 / 3;
+   }
+
+   h3 {
+      font-size: 1.4rem;
+      margin-top: 40px;
+   }
+
+   form {
+      display: inline-block;
+      padding: 15px 30px 15px 0px;
+      margin-top: 10px;
+      width: 100%;
+
+      label {
+         font-size: 1.1rem;
+         margin-bottom: 0;
+         min-width: 90%;
+         width: 90%;
+
+         input {
+            margin: 0.5rem 0 1.25rem;
+            padding: 5px 10px;
+            border: 2px solid $brand-primary;
+            width: 100%;
+            display: inline-block;
+         }
+      }
+
+      .checkbox {
+         input {
+            position: absolute;
+            opacity: 0;
+            z-index: -9999;
+         }
+
+         label {
+            position: relative;
+            padding-left: 28px;
+         }
+
+         .indicator {
+            position: absolute;
+            left: -4px;
+            display: block;
+            width: 27px;
+            height: 27px;
+            background: $text-secondary;
+            border-radius: 3px;
+            border: 3px solid$brand-primary;
+            cursor: pointer;
+         }
+         input:checked + label .indicator {
+            background: $brand-tertiary;
+         }
+
+         input:checked + label .indicator::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 16px;
+            border: 4px solid $brand-accent;
+            border-left: none;
+            border-top: none;
+            transform: rotate(45deg);
+            left: 6px;
+         }
+      }
+
+      button {
+         background-color: $brand-accent;
+         border: 0;
+         color: $text-primary;
+         font-family: 'ubuntu';
+         font-size: 1.25rem;
+         padding: 7px 35px 9px;
+      }
+
+      .save {
+         font-size: 0.8rem;
+         height: 0.9rem;
+         color: #198754;
+      }
+   }
+   .display-name {
+   }
+   .create-leaderboard {
+   }
+}
+
+.owned-leaderboards {
+}
