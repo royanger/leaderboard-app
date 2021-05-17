@@ -21,7 +21,7 @@ function Header({ name, isSignedIn, handleLogout }) {
       <header className="header">
          <div className="wrapper">
             <Link to="/" onClick={clearDropdown}>
-               <brand>{process.env.REACT_APP_SITE_TITLE}</brand>
+               <h1>{process.env.REACT_APP_SITE_TITLE}</h1>
             </Link>
             <nav>
                <div>
