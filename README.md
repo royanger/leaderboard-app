@@ -7,6 +7,7 @@ A simple project combining React, GraphQL and FaunaDB to provide a fun leaderboa
 -  Auth is handled via Google Firebase
 -  The DB is FaunaDB, and all queries and mutations are done through Graphql with the Apollo Client.
 -  The frontend is a simple React app, with no SSG or SSR. Since all parts of the app are behind the login, there is no need for SEO for those pages.
+-  No CSS or UI libraries were used -- everything is just plain CSS added through SCSS.
 
 ## Configuring Application
 

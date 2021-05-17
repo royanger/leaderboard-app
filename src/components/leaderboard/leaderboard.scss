@@ -17,13 +17,24 @@
       margin-top: 20px;
 
       .title {
-         background-color: $grey-primary;
-         padding: 10px;
+         background-image: linear-gradient(
+            to right,
+            $brand-primary,
+            $brand-tertiary
+         );
 
          h3 {
             font-size: 1.4rem;
             color: $text-secondary;
+            padding: 10px;
          }
+      }
+      .title:hover {
+         background-image: linear-gradient(
+            to right,
+            $brand-primary,
+            $brand-secondary
+         );
       }
 
       .info {
