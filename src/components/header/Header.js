@@ -2,28 +2,54 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 
 function Header({ name, isSignedIn, handleLogout }) {
+   const [showDropdown, setShowDropdown] = React.useState(false)
+
+   const handleDropdown = e => {
+      setShowDropdown(!showDropdown)
+   }
+
+   const clearDropdown = e => {
+      setShowDropdown(false)
+   }
+
+   const logout = e => {
+      setShowDropdown(false)
+      handleLogout()
+   }
+
    return (
       <header className="header">
          <div className="wrapper">
-            <Link to="/">
+            <Link to="/" onClick={clearDropdown}>
                <brand>{process.env.REACT_APP_SITE_TITLE}</brand>
             </Link>
             <nav>
                <div>
                   <ul>
                      <li>
-                        <Link to="/">Leaderboards</Link>
+                        <Link to="/" onClick={clearDropdown}>
+                           Leaderboards
+                        </Link>
                      </li>
                      {isSignedIn ? (
-                        <>
+                        <div className="dropdown">
                            <li>
-                              <span>{name.displayName}</span>
+                              <button onClick={handleDropdown}>
+                                 {name.displayName}
+                              </button>
                            </li>
-                           <div className="dropdown">
-                              <Link to="/profile">Profile</Link>
-                              <button onClick={handleLogout}>Logout</button>
+                           <div
+                              className={`dropdown-content ${
+                                 showDropdown ? 'show' : 'hide'
+                              }
+                              `}
+                           >
+                              <Link to="/profile" onClick={clearDropdown}>
+                                 Profile
+                              </Link>
+                              <button onClick={logout}>Logout</button>
                            </div>
-                        </>
+                        </div>
                      ) : (
                         ''
                      )}
