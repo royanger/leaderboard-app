@@ -15,8 +15,11 @@
    .board {
       border: 1px solid $grey-secondary;
       margin: 10px 0;
+      display: flex;
+      flex-direction: column;
 
-      .title {
+      .title,
+      .footer {
          background-image: linear-gradient(
             to right,
             $brand-primary,
@@ -29,6 +32,23 @@
             padding: 10px;
          }
       }
+      .footer {
+         margin-top: 1rem;
+         padding: 0.25rem 0.25rem;
+         text-align: right;
+
+         a {
+            font-size: 1rem;
+            color: $text-secondary;
+
+            svg {
+               height: 24px;
+               width: 24px;
+               margin-left: 0.5rem;
+            }
+         }
+      }
+
       .title:hover {
          background-image: linear-gradient(
             to right,
@@ -51,6 +71,7 @@
 
       .info.small {
          font-size: 0.9rem;
+         flex-grow: 1;
       }
 
       .records {
