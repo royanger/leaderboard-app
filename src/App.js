@@ -13,7 +13,6 @@ import Login from './components/profile/Login'
 import Profile from './components/profile/Profile'
 import Leaderboards from './components/leaderboard/Leaderboards'
 import FullLeaderboard from './components/leaderboard/FullLeaderboard'
-import Pubg from './components/pubg'
 
 // import scss
 import './styles.scss'
@@ -90,9 +89,6 @@ function App() {
                      userInfo={userInfo}
                      updateDisplayNameInState={updateDisplayName}
                   />
-               </Route>
-               <Route exact path="/pubg">
-                  <Pubg />
                </Route>
             </Switch>
          )}
