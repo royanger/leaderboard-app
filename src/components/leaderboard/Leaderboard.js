@@ -77,7 +77,58 @@ function Leaderboard({ board, userInfo: { _id, name, displayName } }) {
                         {event.userDoing.displayName} {board.action}{' '}
                         {board.config ? event.userReceiving.displayName : ''}
                      </div>
-                     <div className="count">
+                     <div className="controls">
+                        {_id === event.userDoing._id ||
+                        (event.userReceiving &&
+                           _id === event.userReceiving._id) ? (
+                           <div className="buttons">
+                              <button
+                                 className="increment"
+                                 onClick={() =>
+                                    handleIncrement(event._id, event.count)
+                                 }
+                              >
+                                 <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                 >
+                                    <path
+                                       strokeLinecap="round"
+                                       strokeLinejoin="round"
+                                       strokeWidth="2"
+                                       d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                    />
+                                 </svg>
+                              </button>
+                              <button
+                                 className="decrement"
+                                 onClick={() =>
+                                    handleDecrement(event._id, event.count)
+                                 }
+                              >
+                                 <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                 >
+                                    <path
+                                       strokeLinecap="round"
+                                       strokeLinejoin="round"
+                                       strokeWidth="2"
+                                       d="M20 12H4"
+                                    />
+                                 </svg>
+                              </button>
+                           </div>
+                        ) : (
+                           ''
+                        )}
+                        {event.count}
+                     </div>
+                     {/* <div className="count">
                         {event.count}
                         {_id === event.userDoing._id ||
                         (event.userReceiving &&
@@ -126,7 +177,7 @@ function Leaderboard({ board, userInfo: { _id, name, displayName } }) {
                         ) : (
                            ''
                         )}
-                     </div>
+                     </div> */}
 
                      <div className="buttons"></div>
                   </div>
