@@ -6,10 +6,10 @@ import {
    CREATE_BOARD,
    DELETE_BOARD,
 } from '../../database/queries-mutations.js'
-import { Spinner } from 'react-bootstrap'
 
 // import components
 import LeaderboardListItem from '../leaderboard/LeaderboardListItem'
+import Loader from '../loader/Loader'
 
 function Profile({
    userInfo: { _id, uid, name, displayName },
@@ -220,11 +220,7 @@ function Profile({
                         {config ? 'Dazed898' : ''}
                      </div>
 
-                     <button
-                        type="submit"
-                        disabled={displayNameInfo.status}
-                        className="btn-add"
-                     >
+                     <button type="submit" disabled={displayNameInfo.status}>
                         Add
                      </button>
                   </form>
@@ -234,25 +230,14 @@ function Profile({
                   <h3>Existing Leaderboards</h3>
 
                   <div>
-                     {loading ? (
-                        <div
-                           style={{ display: 'flex', justifyContent: 'center' }}
-                        >
-                           <Spinner animation="border" role="status" size="lg">
-                              <span className="sr-only">Loading...</span>
-                           </Spinner>
-                        </div>
-                     ) : (
-                        ''
-                     )}
-
-                     {leaderboards ? 'ASDFASFDSADF' : 'adsfdasdf'}
+                     {loading ? <Loader size="small" /> : ''}
 
                      {leaderboards
-                        ? leaderboards.map(board => {
+                        ? leaderboards.map((board, i) => {
                              return (
                                 <LeaderboardListItem
                                    key={board._id}
+                                   index={i}
                                    board={board}
                                    onClick={deleteBoard}
                                 />
