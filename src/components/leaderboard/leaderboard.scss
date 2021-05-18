@@ -220,4 +220,12 @@
    &.odd {
       background-color: rgba($brand-primary, 0.1);
    }
+
+   button {
+      background-color: $brand-primary;
+      color: $text-secondary;
+      border: none;
+      font-size: 1rem;
+      padding: 5px 15px;
+   }
 }
