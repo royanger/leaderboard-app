@@ -12,7 +12,7 @@ import {
 } from '../../database/queries-mutations.js'
 
 // import components
-import Loader from '../Loader'
+import Loader from '../loader/Loader'
 
 function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
    const { id } = useParams()
@@ -147,9 +147,13 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
             <h1>{board.title}</h1>
             <p className="info">{board.description}</p>
             <div className="board">
-               <div className="header">
-                  <div>Action</div>
-                  <div>Count</div>
+               <div className="title">
+                  <div>
+                     <h2>Action</h2>
+                  </div>
+                  <div>
+                     <h2>Count</h2>
+                  </div>
                </div>
 
                {events.map((event, i) => {
@@ -216,11 +220,9 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                   )
                })}
             </div>
-            <span className="info small">
-               Board created by: {board.user.displayName}
-            </span>
+            <span className="info small">Owner: {board.user.displayName}</span>
             <div className="create-new">
-               <h3 className="title">Create a new entry:</h3>
+               <h3>Create a new entry:</h3>
 
                <div className="form">
                   <form className="addevent" onSubmit={handleSubmit}>
@@ -248,12 +250,8 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                            : ''}
                      </select>
 
-                     <div
-                        style={{
-                           padding: '0 15px 8px 15px',
-                        }}
-                     >
-                        {board.action}
+                     <div className="action">
+                        <p>{board.action}</p>
                      </div>
                      {board.config ? (
                         <>

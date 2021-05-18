@@ -1,27 +1,13 @@
 import * as React from 'react'
 
-function LeaderboardListItem({ board, onClick }) {
+function LeaderboardListItem({ board, onClick, index }) {
    return (
-      <div
-         style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 3fr auto',
-            borderBottom: '1px solid black',
-            marginTop: '5px',
-         }}
-      >
-         <div style={{ padding: '7px' }}>
+      <div className={`leaderboard-list-item ${index % 2 ? 'odd' : 'even'} `}>
+         <div>
             <strong>{board.title}</strong>
          </div>
-         <div style={{ padding: '7px' }}>{board.description}</div>
-         <div
-            style={{
-               padding: '7px',
-               color: 'red',
-               cursor: 'pointer',
-            }}
-            onClick={() => onClick(board._id)}
-         >
+         <div>{board.description}</div>
+         <div className="controls" onClick={() => onClick(board._id)}>
             <svg
                xmlns="http://www.w3.org/2000/svg"
                style={{

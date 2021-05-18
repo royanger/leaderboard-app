@@ -4,7 +4,7 @@ import { apolloClient } from '../../database/client'
 
 // import components
 import Leaderboard from './Leaderboard'
-import Loader from '../Loader'
+import Loader from '../loader/Loader'
 
 function Leaderboards({ userInfo }) {
    const [boards, setBoards] = React.useState([])
@@ -26,23 +26,25 @@ function Leaderboards({ userInfo }) {
    }
 
    return (
-      <article className="leaderboards">
-         <div className="wrapper">
-            <h1>All Leaderboards</h1>
-            <div className="boards">
-               {boards.map(board => {
-                  return (
-                     <Leaderboard
-                        key={board._id}
-                        board={board}
-                        userInfo={userInfo}
-                        standalone={false}
-                     />
-                  )
-               })}
+      <>
+         <article className="leaderboards">
+            <div className="wrapper">
+               <h1>All Leaderboards</h1>
+               <div className="boards">
+                  {boards.map(board => {
+                     return (
+                        <Leaderboard
+                           key={board._id}
+                           board={board}
+                           userInfo={userInfo}
+                           standalone={false}
+                        />
+                     )
+                  })}
+               </div>
             </div>
-         </div>
-      </article>
+         </article>
+      </>
    )
 }
 
