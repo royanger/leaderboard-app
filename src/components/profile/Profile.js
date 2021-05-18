@@ -213,15 +213,20 @@ function Profile({
                         </label>
                      </div>
 
-                     <div style={{ marginTop: '30px' }}>
-                        <strong>Preview:</strong>
-                        <br />
-                        Trae {action ? action : '<empty>'}{' '}
-                        {config ? 'Dazed898' : ''}
+                     <div className="preview">
+                        <h3>Preview:</h3>
+                        <p>
+                           Trae {action ? action : '<empty>'}{' '}
+                           {config ? 'Dazed898' : ''}
+                        </p>
+
+                        <p className="explanation">
+                           This will show what your leaderboard will look like
+                        </p>
                      </div>
 
                      <button type="submit" disabled={displayNameInfo.status}>
-                        Add
+                        Create
                      </button>
                   </form>
                </div>
