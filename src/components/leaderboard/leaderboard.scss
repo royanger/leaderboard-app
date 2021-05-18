@@ -137,6 +137,35 @@
          &.odd {
             background-color: rgba($brand-primary, 0.1);
          }
+
+         .controls {
+            display: flex;
+            flex-direction: row;
+         }
+         .increment,
+         .decrement {
+            background-color: transparent;
+            border: 2px solid rgba($brand-primary, 0.1);
+            color: rgba($brand-primary, 0.1);
+            margin-right: 0.5rem;
+
+            svg {
+               height: 14px;
+               width: 14px;
+            }
+         }
+         .buttons:hover .increment,
+         .buttons:hover .decrement {
+            border: 2px solid $brand-primary;
+            color: $brand-primary;
+         }
+         .increment:active,
+         .decrement:active {
+            background-color: rgba($brand-primary, 0.3);
+         }
+         .decrement {
+            margin-right: 1.5rem;
+         }
       }
    }
 

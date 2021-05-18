@@ -186,55 +186,56 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                            {event.userDoing.displayName} {board.action}{' '}
                            {board.config ? event.userReceiving.displayName : ''}
                         </div>
-                        <div>
-                           {event.count}
+                        <div className="controls">
                            {_id === event.userDoing._id ||
                            (event.userReceiving &&
                               _id === event.userReceiving._id) ? (
-                              <>
-                                 <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    style={{
-                                       height: '1.35rem',
-                                       width: 'auto',
-                                       marginLeft: '5px',
-                                       color: '#198754',
-                                    }}
+                              <div className="buttons">
+                                 <button
+                                    className="increment"
                                     onClick={() =>
                                        handleIncrement(event._id, event.count)
                                     }
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
                                  >
-                                    <path
-                                       fillRule="evenodd"
-                                       d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-                                       clipRule="evenodd"
-                                    />
-                                 </svg>
-                                 <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    style={{
-                                       height: '1.35rem',
-                                       width: 'auto',
-                                       color: 'red',
-                                    }}
+                                    <svg
+                                       xmlns="http://www.w3.org/2000/svg"
+                                       fill="none"
+                                       viewBox="0 0 24 24"
+                                       stroke="currentColor"
+                                    >
+                                       <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth="2"
+                                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                       />
+                                    </svg>
+                                 </button>
+                                 <button
+                                    className="decrement"
                                     onClick={() =>
                                        handleDecrement(event._id, event.count)
                                     }
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
                                  >
-                                    <path
-                                       fillRule="evenodd"
-                                       d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
-                                       clipRule="evenodd"
-                                    />
-                                 </svg>
-                              </>
+                                    <svg
+                                       xmlns="http://www.w3.org/2000/svg"
+                                       fill="none"
+                                       viewBox="0 0 24 24"
+                                       stroke="currentColor"
+                                    >
+                                       <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth="2"
+                                          d="M20 12H4"
+                                       />
+                                    </svg>
+                                 </button>
+                              </div>
                            ) : (
                               ''
                            )}
+                           {event.count}
                         </div>
                      </div>
                   )
