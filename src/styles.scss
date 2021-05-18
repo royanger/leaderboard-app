@@ -42,6 +42,12 @@ h6 {
    position: absolute;
    white-space: nowrap;
 }
+.status {
+   color: #198754;
+}
+.error {
+   color: red;
+}
 
 /**
  * Utility classes for layout/all components
@@ -58,3 +64,4 @@ h6 {
 @import './components/header/header.scss';
 @import './components/leaderboard/leaderboard.scss';
 @import './components/profile/profile.scss';
+@import './components/loader/loader.scss';
