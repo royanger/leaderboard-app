@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { apolloClient } from '../../database/client'
 import { useQuery } from '@apollo/react-hooks'
 import {
@@ -38,13 +38,18 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
             },
          })
          .then(results => {
-            setBoard(results.data.findBoardByID)
-            const tempEvents = [...results.data.findBoardByID.events.data]
-            const sortedEvents = tempEvents.sort((a, b) => {
-               return b.count - a.count
-            })
-            setEvents(sortedEvents)
-            setLoading(false)
+            if (results.data.findBoardByID) {
+               setBoard(results.data.findBoardByID)
+               const tempEvents = [...results.data.findBoardByID.events.data]
+               const sortedEvents = tempEvents.sort((a, b) => {
+                  return b.count - a.count
+               })
+               setEvents(sortedEvents)
+               setLoading(false)
+            } else {
+               setEvents(false)
+               setLoading(false)
+            }
          })
    }, [id])
 
@@ -139,6 +144,21 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
 
    if (loading) {
       return <Loader />
+   }
+
+   if (!board) {
+      return (
+         <div className="error404">
+            <div className="wrapper">
+               <h1>Nothing to show</h1>
+               <p>
+                  It appears that the leaderboard you are trying to view doesn't
+                  exist. Please visit the <Link to="/">home page</Link> to see
+                  available leaderboards.
+               </p>
+            </div>
+         </div>
+      )
    }
 
    return (

@@ -229,3 +229,12 @@
       padding: 5px 15px;
    }
 }
+
+.error404 {
+   display: flex;
+   justify-content: center;
+
+   .wrapper {
+      flex-direction: column;
+   }
+}
