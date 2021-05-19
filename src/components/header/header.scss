@@ -1,5 +1,4 @@
 .header {
-   width: 98%;
    background-image: linear-gradient(
       to right,
       $brand-primary,
@@ -21,6 +20,7 @@
    }
 
    .wrapper {
+      width: 98%;
       @include screen-size('desktop') {
          width: 100%;
          flex-direction: row;
@@ -29,9 +29,11 @@
 
    h1 {
       color: $text-secondary;
+      margin-bottom: 1rem;
       font-size: 1.5em;
       @include screen-size('desktop') {
          font-size: 2.5em;
+         margin-bottom: 0;
       }
    }
 
