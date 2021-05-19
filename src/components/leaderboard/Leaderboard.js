@@ -128,56 +128,6 @@ function Leaderboard({ board, userInfo: { _id, name, displayName } }) {
                         )}
                         {event.count}
                      </div>
-                     {/* <div className="count">
-                        {event.count}
-                        {_id === event.userDoing._id ||
-                        (event.userReceiving &&
-                           _id === event.userReceiving._id) ? (
-                           <>
-                              <svg
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 style={{
-                                    height: '1.35rem',
-                                    width: 'auto',
-                                    marginLeft: '5px',
-                                    color: '#198754',
-                                 }}
-                                 onClick={() =>
-                                    handleIncrement(event._id, event.count)
-                                 }
-                                 viewBox="0 0 20 20"
-                                 fill="currentColor"
-                              >
-                                 <path
-                                    fillRule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-                                    clipRule="evenodd"
-                                 />
-                              </svg>
-                              <svg
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 style={{
-                                    height: '1.35rem',
-                                    width: 'auto',
-                                    color: 'red',
-                                 }}
-                                 onClick={() =>
-                                    handleDecrement(event._id, event.count)
-                                 }
-                                 viewBox="0 0 20 20"
-                                 fill="currentColor"
-                              >
-                                 <path
-                                    fillRule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
-                                    clipRule="evenodd"
-                                 />
-                              </svg>
-                           </>
-                        ) : (
-                           ''
-                        )}
-                     </div> */}
 
                      <div className="buttons"></div>
                   </div>
@@ -195,7 +145,7 @@ function Leaderboard({ board, userInfo: { _id, name, displayName } }) {
                   fill="currentColor"
                >
                   <path
-                     fill-rule="evenodd"
+                     fillRule="evenodd"
                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
                      clipRule="evenodd"
                   />

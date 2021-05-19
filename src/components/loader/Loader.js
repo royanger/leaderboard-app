@@ -5,7 +5,7 @@ function Loader({ size }) {
       <div className="loader">
          <div className="wrapper">
             <div
-               class={`spinner ${
+               className={`spinner ${
                   size && size === 'small' ? 'small' : 'large'
                } `}
             ></div>
