@@ -1,6 +1,12 @@
 # Leaderboard App
 
-A simple project combining React, GraphQL and FaunaDB to provide a fun leaderboard for friends who game together on a particular discord.
+A simple project combining React, GraphQL and FaunaDB to provide a fun leaderboard for friends who game together on a particular discord. This is just a fun, silly app and was a chance to work on something using GraphQL and FaunaDB and have a live app.
+
+![Sample of the application](main-layout.jpg)
+
+| Account Management                            | Leaderboard                     |
+| --------------------------------------------- | ------------------------------- |
+| ![Account Management](account-management.jpg) | ![Leaderboard](leaderboard.jpg) |
 
 ## How does it work?
 
