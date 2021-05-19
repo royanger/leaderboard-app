@@ -305,7 +305,7 @@ function FullLeaderboard({ userInfo: { _id, name, displayName } }) {
                      ) : (
                         ''
                      )}
-                     <div style={{ padding: '0 0 0 20px' }}>
+                     <div>
                         <button>Create</button>
                      </div>
                   </form>
