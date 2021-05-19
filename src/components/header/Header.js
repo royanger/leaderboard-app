@@ -2,17 +2,6 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 
 function Header({ name, isSignedIn, handleLogout }) {
-   const [showDropdown, setShowDropdown] = React.useState(false)
-
-   const handleDropdown = e => {
-      setShowDropdown(!showDropdown)
-   }
-
-   const logout = e => {
-      setShowDropdown(false)
-      handleLogout()
-   }
-
    return (
       <header className="header">
          <div className="wrapper">
@@ -33,7 +22,7 @@ function Header({ name, isSignedIn, handleLogout }) {
                               </Link>
                            </li>
                            <li>
-                              <button onClick={logout}>Logout</button>
+                              <button onClick={handleLogout}>Logout</button>
                            </li>
                         </>
                      ) : (
