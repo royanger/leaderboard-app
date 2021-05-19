@@ -52,12 +52,35 @@ h6 {
 /**
  * Utility classes for layout/all components
  */
+$breakpoints: (
+   'phone': 767px,
+   'tablet': 992px,
+   'laptop': 1200px,
+   'desktop': 1440px,
+) !default;
+
+@mixin screen-size($breakpoint) {
+   @if map-has-key($breakpoints, $breakpoint) {
+      @media (min-width: map-get($breakpoints, $breakpoint )) {
+         @content;
+      }
+   } @else {
+      @warn "The screen size given can not be found. Please use one of: #{map-keys($breakpoints)}";
+   }
+}
 
 .wrapper {
-   max-width: 1440px;
-   width: 100%;
+   width: 95%;
+
+   @include screen-size('desktop') {
+      padding: 0 0.5rem;
+      width: 1440px;
+   }
+
+   // max-width: 1440px;
+   // width: 100%;
    display: flex;
-   flex-direction: row;
+   flex-direction: column;
    justify-content: center;
 }
 

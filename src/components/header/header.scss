@@ -1,6 +1,5 @@
 .header {
-   display: flex;
-   width: 100%;
+   width: 98%;
    background-image: linear-gradient(
       to right,
       $brand-primary,
@@ -8,29 +7,57 @@
       $brand-tertiary
    );
 
-   padding: 1em 3em;
+   padding: 1em 1em;
    display: flex;
-   flex-direction: row;
+   flex-direction: column;
    justify-content: center;
+
+   @include screen-size('tablet') {
+      padding: 1em 2em;
+   }
+   @include screen-size('desktop') {
+      width: 100%;
+      padding: 1em 3em;
+   }
+
+   .wrapper {
+      @include screen-size('desktop') {
+         width: 100%;
+         flex-direction: row;
+      }
+   }
 
    h1 {
       color: $text-secondary;
-      font-size: 2.5em;
+      font-size: 1.5em;
+      @include screen-size('desktop') {
+         font-size: 2.5em;
+      }
    }
 
    nav {
       display: flex;
       flex-grow: 1;
-      align-self: flex-end;
+      align-self: flex-start;
       justify-content: flex-end;
       position: relative;
+
+      @include screen-size('tablet') {
+         align-self: flex-end;
+         justify-content: flex-end;
+      }
 
       ul {
          display: flex;
          flex-direction: row;
          list-style: none;
-         font-size: 1.25rem;
+         font-size: 1rem;
          margin-bottom: 0;
+         padding: 0;
+
+         @include screen-size('tablet') {
+            font-size: 1.25rem;
+         }
 
          li button,
          li a {

@@ -8,15 +8,24 @@
    }
    .boards {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap: 50px;
+      grid-template-columns: 1fr;
+      grid-gap: 0;
+
+      @include screen-size('laptop') {
+         grid-template-columns: 1fr 1fr;
+         grid-gap: 50px;
+      }
    }
 
    .board {
       border: 1px solid $grey-secondary;
-      margin: 10px 0;
+      margin: 20px 0;
       display: flex;
       flex-direction: column;
+
+      @include screen-size('laptop') {
+         margin: 10px 0;
+      }
 
       .title,
       .footer {
@@ -96,7 +105,10 @@
                background-color: transparent;
                border: 2px solid rgba($brand-primary, 0.1);
                color: rgba($brand-primary, 0.1);
-               margin-right: 0.5rem;
+               margin-right: 0.2rem;
+               @include screen-size('tablet') {
+                  margin-right: 0.5rem;
+               }
 
                svg {
                   height: 14px;
@@ -113,7 +125,10 @@
                background-color: rgba($brand-primary, 0.3);
             }
             .decrement {
-               margin-right: 1.5rem;
+               margin-right: 0.75rem;
+               @include screen-size('tablet') {
+                  margin-right: 1.5rem;
+               }
             }
          }
       }
@@ -257,7 +272,10 @@
 
 .leaderboard-list-item {
    display: grid;
-   grid-template-columns: 1fr 3fr auto;
+   grid-template-columns: 1fr;
+   @include screen-size('laptop') {
+      grid-template-columns: 1fr 3fr auto;
+   }
    margin-top: 5px;
 
    div {
